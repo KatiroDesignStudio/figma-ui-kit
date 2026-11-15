@@ -52,7 +52,8 @@ Une liste d'écarts (nœud, règle, attendu) : corrige exactement ces écarts, r
 ## Règles
 - Tu n'écris que dans les pages du kit, de `Revue` à `Écrans kit`. Jamais dans une page d'écrans d'origine.
 - Tu ne supprimes rien. Tu ne publies rien.
-- Aucune documentation d'usage : une ligne de description par composant, au plus.
+- Aucune documentation d'usage, aucun paragraphe ni texte d'explication dans les pages du kit : titres, noms et valeurs seulement, en anglais (`structure-figma.md`, « Texte et langue »). Le champ description d'un composant reste vide, sauf la liste de son décor (`controles.md`).
+- Planches des Foundations : suis `structure-figma.md` à la lettre, puis vérifie chaque planche par capture (rien de coupé, rien qui chevauche, colonnes alignées) avant de rendre le lot.
 - Jamais de tirets cadratins.
 
 ## Avancement

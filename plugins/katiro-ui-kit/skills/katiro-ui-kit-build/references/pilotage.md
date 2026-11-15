@@ -29,7 +29,7 @@ L'utilisateur doit voir, chaque minute, que le travail avance. Un agent lancé n
 - Contrôle Seiri à la fin d'une phase (fin), du kit (express) ou d'un écran (`katiro-ui-kit-templates`), jamais après chaque lot.
 - Pas de scan delta quand le scan initial couvre déjà la phase.
 - La Revue, les dates et les petites retouches désignées nœud par nœud vont à **Seiso**, jamais à Seiton.
-- `get_screenshot` par section touchée, jamais un écran ou une page entière.
+- `get_screenshot` par section ou planche touchée, jamais un écran ou une page entière.
 
 ## Noms, rôles, modèles et annonce
 | Étiquette (toujours en entier) | Modèle | Travail |
@@ -55,6 +55,23 @@ Une seule ligne, à la fin du bilan de clôture de `katiro-ui-kit-build`, jamais
 2. Écarts à une décision déjà prise : renvoie la liste (nœud, règle, attendu) au Seiton en cours, sans question. Deux allers-retours au plus, puis point à valider.
 3. **Validation groupée** : doutes de Seiton et écarts qui demandent une décision, en un seul récapitulatif. Une valeur décidée qui échoue à un seuil d'accessibilité en fait partie : Seiton ne la corrige jamais de lui-même.
 4. Seiton corrige les seuls points tranchés ; passe les lots à « fait » dans `uikit.md`.
+
+## Contrôle de présentation
+Après le contrôle, avant la recette : tu vérifies toi-même le rendu des pages du kit écrites, comme un lead design relit avant de montrer au client.
+1. Une capture par planche des Foundations et par section de famille touchée (`get_screenshot`, assez grande pour lire les étiquettes).
+2. Grille fixe, rien d'autre :
+   - aucun paragraphe, aucune description, aucune explication ; seulement titres, noms et valeurs ;
+   - tout le texte de présentation en anglais ;
+   - chaque variable et chaque style présent une fois, dans sa planche, au bon tri ;
+   - valeurs écrites identiques à la variable ou au style (hex, px, ratio de contraste) ;
+   - transparences sur damier ;
+   - aucun texte coupé, tronqué ou qui chevauche ; rien hors cadre ;
+   - alignements et écarts réguliers, colonnes de tableau alignées ;
+   - tout ce qui est montré se voit en capture (grilles dessinées, ombres et flous lisibles) ; cartes comparables à la même échelle ;
+   - textes de présentation sur les styles et rôles du kit.
+3. Chaque écart devient une action précise : nœud, ce qui ne va pas, ce qu'il faut (« 189:320 : hex `#93A091` affiché, variable `#93a091` en minuscules ; écrire en majuscules comme les autres »). Liste envoyée à **Seiso** (texte, alignement, ordre, taille d'un cadre de présentation) ou au Seiton en cours (planche à reconstruire).
+4. Nouvelle capture des planches corrigées. Deux tours au plus ; ce qui reste devient un point de la recette.
+Pas de question pour ce contrôle : il applique une règle fixe (`structure-figma.md`). Il n'ajoute aucun texte.
 
 ## Élément introuvable
 Une décision demande un élément que le fichier n'a pas (une icône de la famille choisie, par exemple) : Seiton ne dessine jamais de mémoire. Question : l'utilisateur colle l'élément dans la page du kit, ou donne le lien officiel. Avec un lien d'icône, récupère le SVG officiel dans le paquet npm de la famille, version fixée (par exemple `https://unpkg.com/lucide-static@{version}/icons/{nom}.svg`), dans un dossier de travail vide ; lis-le avant de le transmettre à Seiton, avec sa licence.
