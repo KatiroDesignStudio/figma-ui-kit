@@ -28,7 +28,7 @@ L'utilisateur doit voir, chaque minute, que le travail avance. Un agent lancé n
 - Seiton : un seul par phase en mode fin ; en mode express, un par niveau au plus ; avec `katiro-ui-kit-templates`, un par chantier (écrans et retouches du kit).
 - Contrôle Seiri à la fin d'une phase (fin), du kit (express) ou d'un écran (`katiro-ui-kit-templates`), jamais après chaque lot.
 - Pas de scan delta quand le scan initial couvre déjà la phase.
-- La Revue, la Couverture, les dates et les petites retouches désignées nœud par nœud vont à **Seiso**, jamais à Seiton.
+- La Revue, les dates et les petites retouches désignées nœud par nœud vont à **Seiso**, jamais à Seiton.
 - `get_screenshot` par section touchée, jamais un écran ou une page entière.
 
 ## Noms, rôles, modèles et annonce
@@ -39,7 +39,7 @@ L'utilisateur doit voir, chaque minute, que le travail avance. Un agent lancé n
 | **L'agent Hairyo (Design Accessibility RGAA) de Katiro Studio** | celui de la conversation | Recommandations d'accessibilité RGAA, en option après le UI Kit (`katiro-ui-kit-accessibilite`) |
 | **Agent Seiri (Designer Analyst) de Katiro Studio** | Sonnet | Relevés, scans, plans, contrôles (mesures par le code) |
 | **Agent Seiton (Designer Builder) de Katiro Studio** | Opus | Construction : variables, styles, composants, remplacements dans les écrans |
-| **Agent Seiso (Designer Finisher) de Katiro Studio** | Sonnet | Revue, Couverture, dates, petites retouches |
+| **Agent Seiso (Designer Finisher) de Katiro Studio** | Sonnet | Revue, dates, petites retouches |
 
 - **À chaque intervention d'un agent, affiche son étiquette en entier**, jamais le nom seul : en tête de ton premier message de chaque commande, puis à chaque lancement, à chaque reprise d'un agent continué et en tête de chaque résultat que tu en présentes.
 - **Les titres que l'interface affiche portent aussi l'étiquette en entier, suivie du travail** : `description` de l'outil Agent, `summary` de SendMessage, `description` de Monitor. Forme : « {étiquette} · {travail en quelques mots} », sans article devant : « Agent Seiri (Designer Analyst) de Katiro Studio · survol », « Agent Seiton (Designer Builder) de Katiro Studio · atomes, lot P3-02 », « Agent Seiri (Designer Analyst) de Katiro Studio · avancement du scan ». Jamais de titre libre comme « Seiri survol ».

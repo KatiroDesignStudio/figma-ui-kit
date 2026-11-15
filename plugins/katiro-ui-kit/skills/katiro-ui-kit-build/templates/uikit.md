@@ -48,7 +48,7 @@ Règle d'identification : {règle}
 Exclus ({n}) : {nombre par motif}
 Doublons tranchés : {groupes et version retenue}
 Kit existant : {complété, vérifié et complété, reconstruit au propre, laissé intact, aucun}
-Couverture : {gardée, remplacée, aucune}
+Couverture du client : {gardée, rangée, aucune}
 
 ## Référentiel
 Règles fixes du plugin : nomenclature, structure, contrôles (dossier `references/` du plugin).

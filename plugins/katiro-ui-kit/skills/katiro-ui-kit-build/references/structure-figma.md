@@ -5,8 +5,7 @@ Règle fixe du plugin. Seiton la met en place en phase 1 de `katiro-ui-kit-build
 ## Pages, dans cet ordre, en tête du fichier
 | Page | Contenu |
 |---|---|
-| `Couverture` | Nom du projet, date, chiffres avant/après, nombre d'écrans de référence, liens vers chaque page du kit |
-| `Revue` | Le compte rendu du chantier |
+| `Revue` | Le compte rendu du chantier, en tête du fichier : il tient lieu de couverture (nom du projet, date, chiffres avant et après, liens vers les pages) |
 | `Accessibilité` | Seulement si `katiro-ui-kit-accessibilite` a été lancé : les recommandations RGAA |
 | `Arborescence` | Les écrans de référence et leurs parcours |
 | `UI Kit · Fondations` | Couleurs, typographie, espacements, rayons, bordures, opacités, ombres, grilles, icônes |
@@ -26,12 +25,12 @@ Selon `kitExistant` (`perimetre-valide.json`) :
 
 | Valeur | Réponse | Pages du kit | Composants existants | Récapitulatifs |
 |---|---|---|---|---|
-| `complete` | Je le complète | Ses pages restent les pages du kit. Les pages du plugin qui manquent sont créées (Revue, Arborescence, Archives, Couverture sans couverture gardée). Renommer ses pages en `UI Kit · …` est un point du récapitulatif | Gardés tels quels. Seuls ajouts : nouvelles familles, variantes et propriétés | Seulement les manques : familles absentes, variantes manquantes, valeurs des écrans sans variable ni style |
+| `complete` | Je le complète | Ses pages restent les pages du kit. Les pages du plugin qui manquent sont créées (Revue, Arborescence, Archives). Renommer ses pages en `UI Kit · …` est un point du récapitulatif | Gardés tels quels. Seuls ajouts : nouvelles familles, variantes et propriétés | Seulement les manques : familles absentes, variantes manquantes, valeurs des écrans sans variable ni style |
 | `verifie` | Je le vérifie et je le complète | Idem | Retouchés **sans changer leur rendu** (ci-dessous), plus les ajouts | Les manques, puis les écarts du kit : valeurs non reliées, noms hors nomenclature, contrastes, états et focus manquants |
 | `repris` | Je le reconstruis au propre | Pages du plugin ; ses pages passent dans `Archives` une fois vidées | Familles conformes déplacées telles quelles dans leur page de niveau ; les autres reconstruites à partir de copies. Variables et styles gardés, seulement renommés (une nouvelle valeur donne une nouvelle variable) | Tous les points, comme un fichier sans kit |
 | `intact` | Je n'y touche pas | Ses pages passent après le séparateur | Ignorés | Comme un fichier sans kit |
 
-**Pages du plugin déjà présentes** (`Couverture`, `Revue`, `Arborescence`, d'un chantier précédent) : jamais réutilisées ni ignorées sans question. Une question individuelle par page, au récapitulatif du périmètre : « La page {page} existe déjà. Qu'est-ce que je fais de cette page ? » Options : `Je la mets à jour (Recommandé)` ; `Je la refais` (l'ancienne part dans `Archives`) ; `Je n'y touche pas`. Une page supprimée depuis est recréée. Les parcours de l'`Arborescence` existante sont montrés et recommandés au récapitulatif du périmètre, avant tout autre découpage.
+**Pages du plugin déjà présentes** (`Couverture`, `Revue`, `Arborescence`, d'un chantier précédent) : jamais réutilisées ni ignorées sans question. Une question individuelle par page, au récapitulatif du périmètre : « La page {page} existe déjà. Qu'est-ce que je fais de cette page ? » Options : `Je la mets à jour (Recommandé)` ; `Je la refais` (l'ancienne part dans `Archives`) ; `Je n'y touche pas`. Une page supprimée depuis est recréée, sauf `Couverture` : le plugin n'en crée plus. Une `Couverture` d'un ancien chantier : options `Je la range dans Archives (Recommandé)` (la Revue en tient lieu) ; `Je n'y touche pas`. Les parcours de l'`Arborescence` existante sont montrés et recommandés au récapitulatif du périmètre, avant tout autre découpage.
 
 **Famille conforme** : toutes ses valeurs reliées à une variable ou un style, nom et propriétés au format de `nomenclature.md`, contrastes réussis, états attendus présents.
 
@@ -50,7 +49,7 @@ Hors atomes, le niveau est un jugement : il est proposé dans le récapitulatif 
 - **Composants interactifs** (Button, Link, Checkbox, Radio, Switch, Input, Textarea, Select…) : le component set est rangé **en tableau**. Colonnes = les états, dans l'ordre de `nomenclature.md` (`default`, `hover`, `pressed`, `focus`, `disabled`), puis `status=error`. Lignes = les variantes (`primary`, `secondary`, `tertiary` ; `checked=false`, `true`, `indeterminate`), regroupées par taille sous un intertitre (`lg`, `md`, `sm`) ; avec une icône, un second bloc de colonnes « avec icône ». Étiquettes des colonnes au-dessus et des lignes à gauche, hors du component set, dans la section, sur les styles du kit (étiquette). Écarts réguliers, cellules alignées.
 - Dans chaque section : le component set, et au-dessus son nom et sa ligne de description. Un composant prévu pour fond sombre est présenté sur `color/bg/inverse`.
 - Espacements réguliers entre sections. Rien ne se chevauche, rien ne traîne hors section.
-- Les cadres de présentation utilisent les variables et styles du kit dès qu'ils existent. Ceux créés avant la phase 2 y passent dans le dernier lot de la phase 2, avant la recette : titres de page sur le style de titre le plus proche de 40, titre de couverture sur le plus grand style de titre du kit, texte courant sur le style de corps de 16, étiquettes et tableaux sur le style d'étiquette ; couleurs sur les rôles de texte (défaut, atténué, accent pour les liens), de fond (défaut, surface) et de contour (discret). Un style ou un rôle absent du kit est un doute ; un changement de taille de plus de 4 px est listé dans le rapport du lot, puis montré à la recette.
+- Les cadres de présentation utilisent les variables et styles du kit dès qu'ils existent. Ceux créés avant la phase 2 y passent dans le dernier lot de la phase 2, avant la recette : titres de page sur le style de titre le plus proche de 40, titre de la Revue sur le plus grand style de titre du kit, texte courant sur le style de corps de 16, étiquettes et tableaux sur le style d'étiquette ; couleurs sur les rôles de texte (défaut, atténué, accent pour les liens), de fond (défaut, surface) et de contour (discret). Un style ou un rôle absent du kit est un doute ; un changement de taille de plus de 4 px est listé dans le rapport du lot, puis montré à la recette.
 - La date « Mis à jour le » d'un cadre titre est mise à jour en fin de phase, pour les pages écrites pendant la phase.
 
 ## UI Kit · Fondations, sections dans cet ordre
@@ -58,7 +57,7 @@ Sur une seule ligne, de gauche à droite, comme les familles : Couleurs (primiti
 Toute variable ou tout style créé après la phase 2 y est ajouté dans le même lot. Chaque échantillon est branché sur sa variable ou son style. Aucune valeur écrite à la main. Sous l'échantillon : son nom, sa valeur, et le nom de marque s'il existe (pas de description technique). Ordre : celui des décisions.
 
 ## Revue
-- En tête : chiffres « avant » jusqu'à la clôture, puis « avant → après » (`controles.md`, Compteurs, même formule des composants que la Couverture), date du dernier passage.
+- En tête : nom du projet, nombre d'écrans de référence, chiffres « avant » jusqu'à la clôture, puis « avant → après » (`controles.md`, Compteurs), date du dernier passage, liens vers chaque page du kit. Pas de page Couverture séparée : la Revue en tient lieu.
 - Chaque passage de fin de phase met à jour toutes les cartes, celles des phases passées comprises (chiffres, état).
 - Trois colonnes : **Fait** (créé), **Ajusté** (corrigé, fusionné, relié), **À décider** (questions reportées ou avec le client).
 - Une carte par famille (« Button : 3 doublons fusionnés, 2 états ajoutés »), sans numéro de lot, avec un lien vers la section (la première dans l'ordre de la page si la carte en couvre plusieurs). Le titre peut passer à la ligne.

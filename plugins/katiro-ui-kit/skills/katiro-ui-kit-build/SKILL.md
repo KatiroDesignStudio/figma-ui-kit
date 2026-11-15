@@ -56,14 +56,14 @@ Question posée juste après le périmètre validé, notée dans l'en-tête de `
      - `Je le vérifie et je le complète` : en plus, je contrôle tout le kit et je te propose ses corrections, sans changer son rendu ;
      - `Je le reconstruis au propre` : un nouveau kit à côté ; ses variables et styles sont repris, ses familles conformes gardées telles quelles, les autres reconstruites ;
      - `Je n'y touche pas` : il passe après le séparateur, ignoré du scan et des compteurs.
-   Une couverture existante (« Cover »…) : `La garder` (elle reste en tête, la page `Couverture` du plugin n'est pas créée) ou `La remplacer` (elle passe après le séparateur).
+   Une couverture existante (« Cover »…) : `La garder` (elle reste en tête, avant la Revue) ou `La ranger` (elle passe après le séparateur). Le plugin ne crée pas de page de couverture : la Revue en tient lieu.
 6. **Tout le fichier, ou un lot ciblé** : Si la demande indique déjà « tout le fichier » ou « lot ciblé » (lancement depuis le diagnostic), ne repose pas cette question : pour « lot ciblé », pose seulement « Quelle page ou quel parcours ? ». Sinon, « Je construis le kit sur tout le fichier, ou sur un lot ciblé ? » Preuves : les pages et parcours du périmètre, chacun avec son nombre d'écrans, et le volume (écrans, calques) avec le temps que le chantier complet demande. Options : `Tout le fichier ` ; `Un lot ciblé` (puis : « Quelle page ou quel parcours ? », une question individuelle, options = les pages et parcours). Aucune recommandation : l'utilisateur choisit. Seule alerte : au-delà d'environ 30 écrans ou 10 000 calques, dis que le chantier complet prend du temps et consomme beaucoup. Lot ciblé : seuls ses écrans retenus servent au kit ; les autres sont notés « hors lot » dans `perimetre-valide.json` et restent exclus tant que le périmètre n'est pas élargi par une nouvelle validation.
 7. Zéro écran retenu : question (autre règle ou arrêt). Sinon, écris `.uikit/perimetre-valide.json` et la section Périmètre de `uikit.md`. Le périmètre devient R0. Puis la question du mode.
 
 ## Phase 1 : Scan et structure
 1. **Seiri, mode scan** (continué), sur le périmètre validé, en nouveau scan (celui de Shindan est remplacé). Il couvre tous les contrôles des phases 2 à 5. S'il rend « incomplet », relance-le en reprise : il repart du curseur.
 2. Reporte les compteurs « avant » dans `uikit.md`. Présente en 5 lignes les chiffres de consolidation (« 63 couleurs, 47 composants, 3 familles d'icônes ») et le nombre de points à valider attendu.
-3. **Seiton**, lot `P1-01` : pages du kit (avec un kit existant : `structure-figma.md`, « Kit existant »), séparateur, Arborescence (un schéma de noms, sans image), Revue et Couverture avec les compteurs « avant », selon les réponses sur les pages déjà présentes. Ce lot n'est jamais sauté : une Revue et une Arborescence à jour terminent toujours le chantier. En express, ce Seiton est continué pour la suite ; en fin, recette de la structure puis fin de phase (étapes 6 et 7 du mode fin).
+3. **Seiton**, lot `P1-01` : pages du kit (avec un kit existant : `structure-figma.md`, « Kit existant »), séparateur, Arborescence (un schéma de noms, sans image), Revue avec les compteurs « avant », selon les réponses sur les pages déjà présentes. Ce lot n'est jamais sauté : une Revue et une Arborescence à jour terminent toujours le chantier. En express, ce Seiton est continué pour la suite ; en fin, recette de la structure puis fin de phase (étapes 6 et 7 du mode fin).
 
 ## Mode express
 1. **Récapitulatif global** (`questions.md`) : d'abord les seules questions individuelles, puis un point par décision, au niveau de la règle et avec ta recommandation : cadrage et constats des fondations, puis, niveau par niveau, chaque famille avec son nom, son niveau et ses propriétés (cadrage des phases 3 à 5, `controles.md`). L'utilisateur valide d'un coup ou corrige des numéros. Chaque point tranché devient une règle R ou une décision D.
@@ -77,7 +77,7 @@ Question posée juste après le périmètre validé, notée dans l'en-tête de `
 3. Questions individuelles, puis **récapitulatif de phase**. Un point reporté bloque seulement les éléments qui en dépendent : mets-les de côté et liste-les.
 4. Lots de 10 familles au plus (`P{phase}-{nn}`), tous construits par le même Seiton. En phase 2, le dernier lot passe sur le kit les cadres de présentation (`structure-figma.md`).
 5. **Contrôle** de la phase (`pilotage.md`).
-6. **Recette** : « {Phase} : je valide ? », avec les liens vers les sections. Puis **Seiso** : toute la Revue, la Couverture, les dates des cadres titres des pages écrites.
+6. **Recette** : « {Phase} : je valide ? », avec les liens vers les sections. Puis **Seiso** : toute la Revue, les dates des cadres titres des pages écrites.
 7. Mets à jour `uikit.md` : phase « faite » ou « close avec reports », compteurs, prochaine action. Fin de session possible (`pilotage.md`).
 
 Une phase sans constat ni question est marquée « rien à faire », sans appel à Seiton.
@@ -85,7 +85,7 @@ Une phase sans constat ni question est marquée « rien à faire », sans appel 
 ## Phase 6 : Clôture
 1. **Seiri, mode contrôle complet** : compteurs « après » (en express, le Seiri du contrôle, continué).
 2. Question : « La page Revue montre le chantier. Avant de livrer, qu'est-ce que je fais de cette page ? » Options : `Je la garde en tête (Recommandé)` ; `Je la range après le séparateur` ; `Je la range dans Archives`.
-3. **Seiso** finalise la Couverture, toute la Revue et les dates des cadres titres.
+3. **Seiso** finalise toute la Revue et les dates des cadres titres.
 4. Bilan : avant/après, points reportés, questions « avec le client » (textes factices compris), ce qui reste au designer. Dernière ligne, la signature (`pilotage.md`).
 5. Option proposée, en une ligne : « Tu veux aller plus loin ? L'agent Hairyo (Design Accessibility RGAA) de Katiro Studio peut faire des recommandations d'accessibilité RGAA sur ton kit et tes écrans, sans rien modifier : `/katiro-ui-kit-accessibilite`. »
 6. Suite proposée : brancher les écrans avec `/katiro-ui-kit-templates`, sur des copies, un écran ou un parcours à la fois (15 à 20 minutes par écran). Propose comme premier écran celui qui emploie le plus de familles du kit.
