@@ -83,7 +83,7 @@ Une **planche** par fondation : un cadre en auto-layout sur `color/bg/default`, 
 
 **Shadows** : une carte 200 × 120 par style d'effet, sur `color/bg/surface`, puis dessous son nom et, par calque, une ligne de mesures (`X 0 · Y 1 · Blur 2 · Spread 0`) et une ligne pour la couleur (`color/shadow/sm-1`), jamais coupée au milieu d'un nom. Un flou d'arrière-plan : sa carte posée sur damier, pour qu'on voie le flou.
 
-**Grids** : un cadre par style de grille, à la largeur du point de rupture, 400 px de haut, le style appliqué, titré `{point de rupture} · {largeur} px`. Les grilles de mise en page ne s'affichent ni en capture ni en export : dans le cadre, chaque colonne (ou zone : barre latérale, contenu) est aussi dessinée en rectangle `color/bg/accent-subtle` (sinon le fond accent le plus clair), marges et gouttières laissées vides. Dessous, les cotes tirées des variables `layout` : `Columns`, `Gutter`, `Margin`, `Content` (et les autres variables du point de rupture).
+**Grids** : un cadre par style de grille, à la largeur du point de rupture, 400 px de haut, le style appliqué, titré `{point de rupture} · {largeur} px`. Les grilles de mise en page ne s'affichent ni en capture ni en export : dans le cadre, chaque colonne de la grille (et chaque zone : barre latérale, contenu) est aussi dessinée en rectangle `color/bg/accent-subtle` (sinon le fond accent le plus clair), marges et gouttières laissées vides. Dessous, les cotes tirées des variables `layout` : `Columns`, `Gutter`, `Margin`, `Content` (et les autres variables du point de rupture).
 
 **Icons**
 - En-tête : faits seulement, tirés des décisions et des comptages : `{bibliothèque} · {style} · {n} icons · {tailles} px · stroke {trait}`.
