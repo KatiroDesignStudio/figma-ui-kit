@@ -12,7 +12,7 @@ Logique BEM, traduite dans les outils natifs de Figma : un développeur lit `But
 - En anglais, `PascalCase`, au singulier : `Button`, `TextField`, `ProductCard`, `Header`.
 - Pas de niveau atomique dans le nom : la page le donne.
 - Sous-composant interne : préfixe `_` (`_Button/Icon`), caché du panneau Assets.
-- Description : une ligne, ce qu'est le composant.
+- Description : une ligne, en anglais, ce qu'est le composant et ses axes, sans usage ni raison (« Action button. 3 variants, 3 sizes, optional icon. »). Le décor s'y ajoute (`controles.md`).
 - Le nom métier d'un composant est une déduction : point du récapitulatif de la phase.
 
 ## Propriétés
@@ -39,11 +39,11 @@ Pages de présentation (`Revue`, `Arborescence`, `UI Kit · Foundations`) : les 
 | `primitives` | Couleurs brutes, sans rôle | `color/blue/500`, `color/neutral/0` |
 | `semantic` | Rôles de couleur, alias vers les primitives, modes clair et sombre s'ils existent | `color/bg/default`, `color/bg/primary`, `color/text/muted`, `color/border/focus`, `color/icon/default` |
 | `dimensions` | Une seule couche, sans mode | `space/16`, `radius/8`, `border/1`, `opacity/50`, `font/family/body`, `font/size/16`, `font/line-height/24`, `font/weight/600`, `font/letter-spacing/0` |
-| `layout` | Grilles, une variable par point de rupture, sans mode | `grid/desktop/columns`, `grid/desktop/gutter`, `grid/desktop/margin` |
+| `layout` | Grilles, une variable par point de rupture, sans mode | `grid/desktop-12/columns`, `grid/desktop-12/column`, `grid/desktop-12/gutter`, `grid/desktop-12/margin`, `grid/desktop-12/content` |
 
-- Chemins en minuscules, séparés par `/`. `color/bg/primary` se lit `--color-bg-primary`. Dans une décision, toujours le nom complet (`color/bg/default`, jamais `bg/default`).
+- Chemins en minuscules, séparés par `/`. `color/bg/primary` se lit `--color-bg-primary`. Toute variable créée reçoit sa syntaxe de code WEB, `var(--{chemin, `/` remplacés par `-`})` (`var(--grid-desktop-12-gutter)`), comme ses voisines : Seiton la pose à la création et la relit avant de rendre le lot. Dans une décision, toujours le nom complet (`color/bg/default`, jamais `bg/default`).
 - Valeur décimale dans un nom : le point devient un tiret (`font/line-height/70-2`). Couleur avec alpha : suffixe `-a{pourcentage}` (`color/violet/800-a24`).
-- Collection à mode unique : le mode s'appelle `default`. `grid/{bp}/columns` a une portée masquée ; gutter et margin la portée d'espacement.
+- Collection à mode unique : le mode s'appelle `default`. `grid/{bp}/columns` a une portée masquée ; gutter et margin la portée d'espacement. Une grille à colonnes a toujours sa largeur de colonne `grid/{bp}/column` et sa largeur de contenu `grid/{bp}/content` (portée largeur et hauteur) : les colonnes dessinées dans la planche Grids y sont reliées.
 - Cran de couleur créé par une règle et hors de l'espace sRGB : chroma réduite, teinte gardée. Cran au-delà du dernier de la rampe (900) : `950`, puis `975`.
 - Rôle d'état : `{rôle}-hover`, `{rôle}-pressed` (`color/bg/action-hover`). Tout autre nom créé par Seiton hors de ces règles est un doute.
 - Arrondi à une variable, seulement quand une décision d'échelle l'a fixé (ou pour un cadre de présentation) : la plus proche ; à égale distance, la plus grande.
