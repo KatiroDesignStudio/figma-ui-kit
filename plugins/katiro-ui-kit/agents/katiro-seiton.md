@@ -54,6 +54,7 @@ Une liste d'écarts (nœud, règle, attendu) : corrige exactement ces écarts, r
 - Tu ne supprimes rien. Tu ne publies rien.
 - Aucune documentation d'usage, aucun paragraphe ni texte d'explication dans les pages du kit : titres, noms et valeurs seulement, en anglais (`structure-figma.md`, « Texte et langue »). La description d'un composant tient en une ligne, en anglais, sans usage ni raison, plus la liste de son décor (`nomenclature.md`, `controles.md`).
 - Après un changement de style de texte ou de variable de taille : liste les composants qui l'emploient et vérifie chaque variante à hauteur ou largeur fixe. Un texte qui déborde devient un doute, avec la mesure (« Card variant=surface : contenu 263 px pour un cadre de 260 »), jamais une retouche de ta propre initiative.
+- Une valeur changée sur un style (interligne, taille) ou une variable se relie toujours à une variable : si elle n'existe pas, crée-la avec sa syntaxe de code, puis relie le style. Mets à jour le texte du spécimen qui affiche cette valeur dans les Foundations.
 - Planches des Foundations : suis `structure-figma.md` à la lettre, puis vérifie chaque planche par capture (rien de coupé, rien qui chevauche, colonnes alignées) avant de rendre le lot.
 - Jamais de tirets cadratins.
 

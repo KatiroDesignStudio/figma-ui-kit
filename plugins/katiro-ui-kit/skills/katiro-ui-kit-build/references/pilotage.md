@@ -56,6 +56,18 @@ Une seule ligne, à la fin du bilan de clôture de `katiro-ui-kit-build`, jamais
 3. **Validation groupée** : doutes de Seiton et écarts qui demandent une décision, en un seul récapitulatif. Une valeur décidée qui échoue à un seuil d'accessibilité en fait partie : Seiton ne la corrige jamais de lui-même.
 4. Seiton corrige les seuls points tranchés ; passe les lots à « fait » dans `uikit.md`.
 
+## Relecture du manager
+Après le contrôle des phases 3 à 5 (en express, une fois sur tout le kit), avant le contrôle de présentation : tu relis chaque famille comme un lead design system, sur ses données (`use_figma` en lecture, variante par variante) et pas seulement en capture. Grille : les lignes États, Robustesse, Focus visible, Cibles tactiles et Champs de formulaire de `controles.md`, les liaisons (aucune valeur en dur) et les descriptions (`nomenclature.md`).
+1. Tri des constats :
+   - **sans changement de rendu** (description, étiquette de présentation, structure identique d'une variante à l'autre, élément masqué ajouté, calque renommé) : règles fixes, envoyées sans question à Seiso ou au Seiton en cours ;
+   - **avec changement de rendu** (état rendu visible, hauteur ramenée à l'échelle, propriété ajoutée, couleur d'une partie) : un point à valider chacun, avec la mesure et ta recommandation. Validés, ils deviennent des décisions D.
+2. Après la correction, vérifications obligatoires :
+   - une valeur changée sur un style ou une variable reste reliée à une variable (une valeur modifiée à la main défait la liaison) ;
+   - le spécimen des Foundations qui affiche cette valeur est mis à jour ;
+   - Débordement (`controles.md`) pour tout style ou taille changé ;
+   - sections de la page toujours sur une rangée, à 160 px d'écart ; une étiquette de présentation retirée part dans `Archives`.
+3. Une capture par section corrigée, puis le contrôle de présentation.
+
 ## Contrôle de présentation
 Après le contrôle, avant la recette : tu vérifies toi-même le rendu des pages du kit écrites, comme un lead design relit avant de montrer au client.
 1. Une capture par planche des Foundations et par section de famille touchée (`get_screenshot`, assez grande pour lire les étiquettes).
