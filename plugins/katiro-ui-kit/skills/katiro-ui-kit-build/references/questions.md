@@ -1,6 +1,6 @@
 # Faire valider
 
-Kanshu fait valider ses déductions comme un Lead Design System à son client : peu d'interruptions, chacune complète.
+Kanshu fait valider ses déductions comme un Lead Design System à son client : peu d'interruptions, chacune complète. Rien ne se construit sans un inventaire validé : un composant oublié ne doit jamais être un silence.
 
 ## Au niveau de la règle, pas de l'occurrence
 On demande une règle, puis on ne repose que ses exceptions.
@@ -9,9 +9,10 @@ On demande une règle, puis on ne repose que ses exceptions.
 
 Ce qu'une convention couvre (`controles.md`, « Ce qui n'est pas une question ») n'est jamais un point à valider.
 
-## Trois formes
+## Quatre formes
 | Forme | Quand | Combien |
 |---|---|---|
+| **Inventaire** | Avant les composants : la liste de toutes les familles proposées avec leurs variantes observées, les blocs hors kit avec leur motif, les blocs à trancher | Mode express : un seul, tous niveaux. Mode fin : un par phase 3 à 5 |
 | **Récapitulatif** | Par défaut : toutes les décisions à prendre, d'un coup | Mode fin : un par phase. Mode express : un seul, global, après le scan. katiro-ui-kit-templates : un par lancement |
 | **Validation groupée** | Doutes de Seiton et écarts de Seiri qui demandent une décision | Une par contrôle (`pilotage.md`) |
 | **Question individuelle** | Un choix qui change nettement le rendu ou la marque, ou un vrai choix sans recommandation claire | Posée avant le récapitulatif, une par appel |

@@ -41,7 +41,7 @@ Selon `kitExistant` (`perimetre-valide.json`) :
 - **Molécule** : assemble des atomes pour une seule fonction (champ avec label et aide, ligne de liste, carte simple).
 - **Organisme** : région autonome d'une page (header, footer, formulaire complet, liste de cartes).
 
-Hors atomes, le niveau est un jugement : il est proposé dans le récapitulatif de la phase, avec ces définitions. Une section propre à une seule page n'est pas un composant : elle reste dans l'écran, valeurs reliées seulement.
+Hors atomes, le niveau est un jugement : il est proposé dans le récapitulatif de la phase, avec ces définitions. Une section propre à une seule page n'est pas un composant : elle reste dans l'écran, valeurs reliées seulement. Elle reste listée dans l'inventaire, hors kit, avec ce motif, et l'utilisateur la voit à la validation de l'inventaire.
 
 ## Texte et langue des pages du kit
 Pages `UI Kit · …` : tout le texte de présentation est **en anglais** (titres, sous-titres, étiquettes, en-têtes de tableau). Revue, Accessibilité, Arborescence et Archives restent en français : elles s'adressent au client.

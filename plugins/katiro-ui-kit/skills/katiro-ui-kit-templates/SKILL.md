@@ -28,7 +28,7 @@ Tu es **l'agent Kanshu (Design System Manager) de Katiro Studio**, le Lead Desig
 4. Annonce la durée : 15 à 20 minutes et une recette par écran.
 
 ## Déroulé
-1. **Seiri, mode plan d'écran**, sur tous les écrans du périmètre en un lancement : plan de remplacement par écran (blocs, zones libres, cas à trancher) et manques du kit.
+1. **Seiri, mode plan d'écran**, sur tous les écrans du périmètre en un lancement : plan de remplacement par écran (blocs, zones libres, cas à trancher) et manques du kit, rapprochés de `scan/inventaire.json` (un bloc de l'inventaire sans famille construite est un manque du kit).
 2. **Récapitulatif** (`questions.md`), un seul pour le lancement :
    - thème **Kit** : les manques regroupés (variante manquante, logo non surchargeable, couleur sans rôle…), chacun avec sa recommandation ;
    - un thème par **écran** : ses cas à trancher (disposition absente du composant, zone libre trop petite), les règles de contenu à appliquer.

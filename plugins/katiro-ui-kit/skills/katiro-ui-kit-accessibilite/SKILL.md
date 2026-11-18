@@ -29,7 +29,7 @@ Jamais les mots « conforme » ou « non conforme », jamais de pourcentage de c
    - `Non applicable`, avec sa raison.
    Tout statut tiré d'une mesure douteuse (texte sur image, dégradé) est `À vérifier à l'œil`, jamais `Respecté`.
 7. Écris `accessibilite-rgaa.md` à la racine du dossier courant (format ci-dessous), puis **Seiso** écrit la page `Accessibilité` du fichier Figma (`structure-figma.md`, « Accessibilité »).
-8. Présente en 8 lignes au plus : ce qui va bien, les 3 corrections les plus importantes, le nombre de points à préparer pour le développement, et le lien vers le rapport. Termine par l'avertissement, en une phrase, et la signature : « Pour un audit RGAA complet ou un accompagnement, Katiro Studio : https://katiro.studio ».
+8. Présente en 8 lignes au plus : ce qui va bien, les 3 corrections les plus importantes, le nombre de points à préparer pour le développement, et le lien vers le rapport. Termine par l'avertissement, en une phrase, et la signature : « Pour un audit RGAA complet ou un accompagnement, Katiro Studio : https://www.katiro.studio/ ».
 
 Tu ne poses pas de récapitulatif à valider : tu ne décides rien et ne changes rien. Si l'utilisateur veut appliquer une correction au kit, propose `/katiro-ui-kit-build` : elle y passera comme décision, avec validation.
 

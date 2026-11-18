@@ -62,4 +62,4 @@ Pour économiser, choisis Sonnet pour ta conversation : le travail lourd se fait
 Pas de documentation d'usage, pas de bibliothèque partagée, pas de motion. Il fait le gros du travail, le designer finit.
 
 ## Licence
-MIT. Fait par [Katiro Studio](https://katiro.studio).
+MIT. Fait par [Katiro Studio](https://www.katiro.studio/).

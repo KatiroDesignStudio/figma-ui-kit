@@ -41,6 +41,8 @@ En mode express, les phases 2 à 5 partagent le récapitulatif et la recette.
 | Copies détachées | | |
 | Contrastes en échec | | |
 | Noms hors nomenclature | | |
+| Inventaire : blocs, familles, hors kit, à trancher | | |
+| Couverture des écrans par les familles du kit | | |
 
 ## Périmètre
 Règle d'identification : {règle}
@@ -49,6 +51,7 @@ Exclus ({n}) : {nombre par motif}
 Doublons tranchés : {groupes et version retenue}
 Kit existant : {complété, vérifié et complété, reconstruit au propre, laissé intact, aucun}
 Couverture du client : {gardée, rangée, aucune}
+Inventaire validé : {date} · {n} familles, {n} hors kit (voir `.uikit/scan/inventaire.json`)
 
 ## Référentiel
 Règles fixes du plugin : nomenclature, structure, contrôles (dossier `references/` du plugin).

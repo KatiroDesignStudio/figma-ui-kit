@@ -72,7 +72,7 @@ Au tutoiement : « va pouvoir t'aider », « Si tu as besoin d'aller plus loin �
 `/katiro-ui-kit-build {lien Figma}`, puis tout le fichier ou un lot ciblé (une page ou un parcours : {liste, avec le nombre d'écrans de chacun}). Le chantier complet prend du temps ({n} écrans, {n} calques) : un lot ciblé permet de commencer plus vite.
 
 ---
-Diagnostic réalisé avec Katiro UI Kit, de [Katiro Studio](https://katiro.studio).
+Diagnostic réalisé avec Katiro UI Kit, de [Katiro Studio](https://www.katiro.studio/).
 
 Notre agent Kanshu (Design System Manager) de Katiro Studio va pouvoir vous aider à réaliser un UI Kit aux petits oignons (sans les larmes qui vont avec).
 Si vous avez besoin d'aller plus loin qu'un UI Kit, n'hésitez pas à contacter [Olivier de Katiro Studio](https://www.linkedin.com/in/olivierparant/) de ma part :)
