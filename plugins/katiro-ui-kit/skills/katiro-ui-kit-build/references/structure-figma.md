@@ -1,6 +1,6 @@
 # Structure du UI Kit dans Figma
 
-Règle fixe du plugin. Seiton la met en place en phase 1 de `katiro-ui-kit-build` ; `Écrans kit` est créée par `katiro-ui-kit-templates` au premier écran branché.
+Règle fixe du plugin. Seiton la met en place en phase 1 de `katiro-ui-kit-build` ; `Écrans kit` est créée par `katiro-ui-kit-templates` au premier écran qui reçoit le kit.
 
 ## Pages, dans cet ordre, en tête du fichier
 | Page | Contenu |
@@ -13,7 +13,7 @@ Règle fixe du plugin. Seiton la met en place en phase 1 de `katiro-ui-kit-build
 | `UI Kit · Molecules` | |
 | `UI Kit · Organisms` | |
 | `Archives` | Ce qui a été remplacé |
-| `Écrans kit` | Les copies des écrans branchés sur le kit, sous le nom de l'original, côte à côte dans l'ordre des parcours |
+| `Écrans kit` | Les copies des écrans qui ont reçu le kit, sous le nom de l'original, côte à côte dans l'ordre des parcours |
 | `---` | Séparateur (page vide nommée de tirets), puis les pages d'écrans existantes, inchangées |
 
 Pas de numéro devant les pages du kit : l'ordre de la liste suffit, et le préfixe `UI Kit · ` les regroupe parmi les pages du fichier. Un kit rangé avant la v0.8.0 (`00 Fondations` à `03 Organismes`, sections empilées) : Seiton renomme les pages et remet les sections sur une ligne au premier lot de la reprise, sans créer de nouvelles pages. Un kit rangé avant la v0.22.0 (`UI Kit · Fondations`, `Atomes`, `Molécules`, `Organismes`) : Seiton passe les noms des pages en anglais au premier lot de la reprise, puis refait la page `UI Kit · Foundations` selon les planches ci-dessous ; l'ancienne présentation part dans `Archives`.
@@ -59,7 +59,7 @@ Pages `UI Kit · …` : tout le texte de présentation est **en anglais** (titre
 ## UI Kit · Foundations
 Une **planche** par fondation : un cadre en auto-layout sur `color/bg/default`, 1440 px de large (Colors et Grids s'élargissent à leur contenu), côte à côte de gauche à droite, alignées en haut, à 160 px. Dans cet ordre : `Colors`, `Typography`, `Spacing`, `Radius`, `Borders`, `Opacity`, `Shadows`, `Grids`, `Icons`. Une fondation sans variable ni style n'a pas de planche.
 - **En-tête** de chaque planche, sur `color/bg/surface` : `Foundations → {planche}` en petit, le titre, puis une ligne de faits comptés (`31 variables · 1 mode`). Puis des blocs, chacun sous un sous-titre (`Primitives`, `Semantic`, `Text styles`…), séparés de 64 px.
-- Chaque échantillon est branché sur sa variable ou son style, et son calque porte le nom du jeton. Les valeurs écrites (hex, px, ratios) sont celles de la variable ou du style, relues au moment de l'écriture, jamais tapées de mémoire.
+- Chaque échantillon est relié à sa variable ou son style, et son calque porte le nom du jeton. Les valeurs écrites (hex, px, ratios) sont celles de la variable ou du style, relues au moment de l'écriture, jamais tapées de mémoire.
 - Tri : par valeur croissante (paliers de couleur du plus clair au plus foncé), sauf les tableaux `Semantic`, par ordre alphabétique du jeton (les rôles d'un même état restent ensemble). Tableaux : en-têtes de colonnes en haut, une ligne par jeton, un trait `color/border/default` entre les lignes, colonnes alignées.
 - Damier : deux carrés alternés `color/bg/default` et `color/bg/subtle`, 8 px, sous tout échantillon transparent.
 - Toute variable ou tout style créé après la phase 2 est ajouté à sa planche dans le même lot.
@@ -96,7 +96,7 @@ Une **planche** par fondation : un cadre en auto-layout sur `color/bg/default`, 
 - Trois colonnes : **Fait** (créé), **Ajusté** (corrigé, fusionné, relié), **À décider** (questions reportées ou avec le client).
 - Une carte par famille (« Button : 3 doublons fusionnés, 2 états ajoutés »), sans numéro de lot, avec un lien vers la section (la première dans l'ordre de la page si la carte en couvre plusieurs). Le titre peut passer à la ligne.
 - Pas de paragraphe.
-- **Décisions du kit**, sous les trois colonnes : une ligne par décision, `{thème} · {décision} · {date}`, cadre `section/Décisions du kit`. Seulement les décisions qu'on ne voit pas dans le kit lui-même et qu'une reprise reposerait sinon : périmètre et exclusions, arborescence, police, règles de dérivation des états, exceptions d'échelle, noms gardés hors format, points à trancher au branchement, points reportés. Pas ce qui se voit dans les composants (un état ajouté, un nom corrigé). Environ 10 à 15 lignes. Mis à jour à chaque passage de la Revue. C'est la mémoire du projet qui voyage avec le fichier : `uikit.md` reste le détail, sur la machine du chantier.
+- **Décisions du kit**, sous les trois colonnes : une ligne par décision, `{thème} · {décision} · {date}`, cadre `section/Décisions du kit`. Seulement les décisions qu'on ne voit pas dans le kit lui-même et qu'une reprise reposerait sinon : périmètre et exclusions, arborescence, police, règles de dérivation des états, exceptions d'échelle, noms gardés hors format, points à trancher en appliquant le kit aux écrans, points reportés. Pas ce qui se voit dans les composants (un état ajouté, un nom corrigé). Environ 10 à 15 lignes. Mis à jour à chaque passage de la Revue. C'est la mémoire du projet qui voyage avec le fichier : `uikit.md` reste le détail, sur la machine du chantier.
 
 ## Accessibilité
 - En tête, en évidence : l'avertissement de `katiro-ui-kit-accessibilite` (une aide, pas un audit, ni taux ni déclaration de conformité ; audit par un expert pour aller plus loin), puis « RGAA 4.1.2 · {date} · Agent Hairyo (Design Accessibility RGAA) de Katiro Studio ».
@@ -108,10 +108,10 @@ Une **planche** par fondation : un cadre en auto-layout sur `color/bg/default`, 
 - En tête : « {n} écrans de référence · {e} espaces · relevé du {date} ». Les écrans exclus sont seulement comptés.
 - **Une arborescence par espace d'accès** (public, client connecté, administration…), jamais plus : les sous-parties d'un espace (pages légales, demandes, prospection) sont des branches de son arbre, pas des arborescences séparées.
 - **Un arbre de profondeur**, tiré de `arbre` (`perimetre-valide.json`) : la racine de chaque espace est son écran d'entrée (accueil du site, connexion, ou tableau de bord sans écran de connexion), puis les écrans qu'il ouvre, puis leurs enfants un niveau plus bas, autant de niveaux que la navigation (un article est sous la page Blog, « Demande · Nouvelle » sous « Demandes »). En auto-layout, traits simples du parent vers ses enfants, recalculés à chaque passage (les connecteurs n'existent pas en Figma Design).
-- Chaque écran : son nom et un lien vers l'écran d'origine (et vers sa copie dans `Écrans kit` une fois branché), dans une case de texte.
+- Chaque écran : son nom et un lien vers l'écran d'origine (et vers sa copie dans `Écrans kit` une fois le kit appliqué), dans une case de texte.
 - **Un schéma de noms, jamais d'image** : aucune vignette, capture, copie ni instance d'écran. Les écrans évoluent : une image serait vite fausse.
 
 ## Archives
-- Un cadre `{écran}` par écran branché ; l'élément y garde sa taille d'origine (fixée avant le déplacement).
+- Un cadre `{écran}` par écran qui a reçu le kit ; l'élément y garde sa taille d'origine (fixée avant le déplacement).
 - Chaque élément porte une étiquette : « Remplacé par {nom} · D{n} · {date} », D{n} étant la décision qui fixe ce remplacement.
 - Rien n'y est supprimé par l'agent. Le vidage est une décision de l'utilisateur, faite à la main.

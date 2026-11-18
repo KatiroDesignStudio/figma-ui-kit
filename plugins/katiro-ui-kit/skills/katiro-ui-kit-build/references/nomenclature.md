@@ -51,9 +51,9 @@ Pages de présentation (`Revue`, `Arborescence`, `UI Kit · Foundations`) : les 
 - Les noms des primitives (teinte, cran) sont un point du récapitulatif de la phase 2.
 
 ## Styles
-- Texte : `text/{rôle}/{taille}` (`text/heading/xl`, `text/body/md`, `text/label/sm`), branchés sur `dimensions`.
+- Texte : `text/{rôle}/{taille}` (`text/heading/xl`, `text/body/md`, `text/label/sm`), reliés à `dimensions`.
 - Effets : `shadow/sm`, `shadow/md`, `shadow/lg`. Le focus n'est pas un effet : c'est un calque `focus-ring` (`controles.md`). Une couleur d'effet reliée à une variable opaque perd son alpha : elle se relie à un rôle `semantic` (`color/shadow/{taille}`) qui pointe vers une primitive avec alpha (`color/violet/800-a24`). Flou d'arrière-plan : `blur/{nom}`.
-- Grilles : un style par point de rupture, `grid/mobile`, `grid/desktop`, branché sur `layout`. Les points de rupture sont une question de phase 2.
+- Grilles : un style par point de rupture, `grid/mobile`, `grid/desktop`, relié à `layout`. Les points de rupture sont une question de phase 2.
 
 ## Icônes
-Exception écrite à la règle `PascalCase`, comme dans les bibliothèques d'icônes : un composant par icône, `icon/{nom-kebab}` (`icon/arrow-right`), nom officiel de la famille. Cadre carré à la taille décidée en phase 2, un seul calque `icon`, couleur branchée sur `color/icon/*`, trait branché sur `border/icon` (créée avec la décision d'icônes), taille réglée sur l'instance. Centrage selon la grille de la famille.
+Exception écrite à la règle `PascalCase`, comme dans les bibliothèques d'icônes : un composant par icône, `icon/{nom-kebab}` (`icon/arrow-right`), nom officiel de la famille. Cadre carré à la taille décidée en phase 2, un seul calque `icon`, couleur reliée à `color/icon/*`, trait relié à `border/icon` (créée avec la décision d'icônes), taille réglée sur l'instance. Centrage selon la grille de la famille.

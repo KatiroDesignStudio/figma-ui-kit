@@ -1,6 +1,6 @@
 # Katiro UI Kit
 
-Un agent pour Claude Code qui range le UI Kit d'un fichier Figma, puis branche tes écrans dessus. Directement dans Figma.
+Un agent pour Claude Code qui range le UI Kit d'un fichier Figma, puis applique le kit à tes écrans. Directement dans Figma.
 
 ## Installer
 Ajoute le catalogue Katiro Studio, puis installe le plugin :
@@ -34,7 +34,7 @@ claude plugin update katiro-ui-kit@katiro-studio
 |---|---|---|
 | « Fais un diagnostic de mon fichier Figma : {lien} » | Un rapport chiffré de l'état du fichier. Rien n'est modifié. | `/katiro-ui-kit-diagnostic` |
 | « Range le UI Kit de mon fichier Figma : {lien} » | Le kit est reconstruit au propre : fondations, atomes, molécules, organismes. Tes écrans ne bougent pas. | `/katiro-ui-kit-build` |
-| « Branche l'écran Accueil sur le UI Kit » | Une copie de l'écran est branchée sur le kit, un écran ou un parcours à la fois. | `/katiro-ui-kit-templates` |
+| « Applique le UI Kit à l'écran Accueil » | Les composants du kit sont mis dans une copie de l'écran, un écran ou un parcours à la fois. | `/katiro-ui-kit-templates` |
 | « Fais-moi des recommandations d'accessibilité » | En option, après le kit : des recommandations RGAA 4.1.2 sur le kit et les écrans, dans un rapport et une page Accessibilité. Rien n'est modifié. Une aide de première couche, pas un audit. | `/katiro-ui-kit-accessibilite` |
 
 **Ton fichier a déjà un UI Kit ?** L'agent te propose de le compléter, de le vérifier, ou de le reconstruire au propre. Ses composants ne sont retouchés que sans changer leur rendu.

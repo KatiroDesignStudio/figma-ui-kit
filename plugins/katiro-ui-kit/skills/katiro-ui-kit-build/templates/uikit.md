@@ -54,7 +54,7 @@ Couverture du client : {gardée, rangée, aucune}
 Règles fixes du plugin : nomenclature, structure, contrôles (dossier `references/` du plugin).
 
 ### Règles (R)
-- R0 Périmètre : seuls les écrans retenus servent au kit et peuvent être branchés. Aucun écran d'origine n'est jamais modifié : katiro-ui-kit-templates branche des copies, dans `Écrans kit`.
+- R0 Périmètre : seuls les écrans retenus servent au kit et peuvent le recevoir. Aucun écran d'origine n'est jamais modifié : katiro-ui-kit-templates applique le kit à des copies, dans `Écrans kit`.
 - R1 Aucune couleur, typo, espacement, rayon, bordure, opacité, ombre ni grille hors variable ou style dans le kit.
 
 ### Décisions (D)
@@ -66,7 +66,7 @@ Règles fixes du plugin : nomenclature, structure, contrôles (dossier `referenc
 | Lot | Familles ou écran | État |
 |---|---|---|
 
-## Écrans branchés
+## Écrans avec le kit
 | Écran | Copie | Date | Recette |
 |---|---|---|---|
 
