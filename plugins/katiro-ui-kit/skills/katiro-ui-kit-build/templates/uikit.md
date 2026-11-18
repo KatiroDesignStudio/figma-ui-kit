@@ -63,6 +63,12 @@ Règles fixes du plugin : nomenclature, structure, contrôles (dossier `referenc
 ### Décisions (D)
 -
 
+## Suivi des familles
+Tiré de l'inventaire validé, recopié dans le cadre Suivi de chaque page du kit. États : à faire, en cours, construit, relu, validé, mis de côté.
+
+| Famille | Niveau | Variantes observées | État | Décision |
+|---|---|---|---|---|
+
 ## Lots
 États : à faire, en cours, fait.
 

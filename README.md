@@ -47,6 +47,7 @@ claude plugin update katiro-ui-kit@katiro-studio
 | **Agent Seiri** (Designer Analyst) de Katiro Studio | Mesure le fichier, en lecture seule | Sonnet |
 | **Agent Seiton** (Designer Builder) de Katiro Studio | Construit ce qui a été validé | Opus |
 | **Agent Seiso** (Designer Finisher) de Katiro Studio | Fait les finitions | Sonnet |
+| **Agent Seiketsu** (Designer Reviewer) de Katiro Studio | Relit chaque étape avant ta recette, sans rien modifier | Opus |
 | **L'agent Hairyo** (Design Accessibility RGAA) de Katiro Studio | Recommande, sans rien modifier, d'après le RGAA | celui de ta conversation |
 
 Pour économiser, choisis Sonnet pour ta conversation : le travail lourd se fait dans les agents.

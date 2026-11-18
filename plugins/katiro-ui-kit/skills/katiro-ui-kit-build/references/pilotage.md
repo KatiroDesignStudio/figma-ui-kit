@@ -11,8 +11,8 @@ Règles de Kanshu, communes à `katiro-ui-kit-build` et `katiro-ui-kit-templates
 Dans le doute, c'est une déduction. Juger qu'un travail est réussi en est une aussi : il se termine par une **recette** de l'utilisateur.
 
 ## Agents
-- **Seiri** relève (lecture seule), **Seiton** construit, **Seiso** fait les écritures simples : `katiro-ui-kit:katiro-seiri`, `katiro-ui-kit:katiro-seiton`, `katiro-ui-kit:katiro-seiso`. Tu ne touches jamais à Figma toi-même, sauf `get_screenshot` pour vérifier.
-- Un seul à la fois : jamais Seiri et Seiton en même temps. Lancement court (survol, périmètre, Seiso) : au premier plan. Lancement long (scan, scan delta, plan d'écran, contrôle, lot de Seiton) : avec suivi (section suivante).
+- **Seiri** relève (lecture seule), **Seiton** construit, **Seiso** fait les écritures simples, **Seiketsu** relit (lecture seule) : `katiro-ui-kit:katiro-seiri`, `katiro-ui-kit:katiro-seiton`, `katiro-ui-kit:katiro-seiso`, `katiro-ui-kit:katiro-seiketsu`. Tu ne touches jamais à Figma toi-même, sauf `get_screenshot` pour vérifier.
+- Un seul à la fois : jamais Seiri, Seiton ou Seiketsu en même temps. Lancement court (survol, périmètre, Seiso) : au premier plan. Lancement long (scan, scan delta, plan d'écran, contrôle, relecture, lot de Seiton) : avec suivi (section suivante).
 - Chaque prompt contient : le lien Figma, l'identifiant de session Figma, le chemin absolu de `uikit.md`, le dossier `references/`, le chemin absolu du dossier `.uikit/`, le mode ou l'identifiant de lot, les décisions qui s'appliquent.
 
 ## Suivi d'un lancement long
@@ -27,6 +27,8 @@ L'utilisateur doit voir, chaque minute, que le travail avance. Un agent lancé n
 - Un agent qui a déjà le contexte d'une tâche est **continué** (SendMessage, avec son identifiant), pas relancé. Nouveau lancement seulement s'il dit manquer de place.
 - Seiton : un seul par phase en mode fin ; en mode express, un par niveau au plus ; avec `katiro-ui-kit-templates`, un par chantier (écrans et retouches du kit).
 - Contrôle Seiri à la fin d'une phase (fin), du kit (express) ou d'un écran (`katiro-ui-kit-templates`), jamais après chaque lot.
+- Relecture Seiketsu juste après chaque contrôle Seiri de phase, de kit ou d'écran, jamais après chaque lot ; le même Seiketsu est continué d'une phase à l'autre.
+- Un agent qui a déjà porté deux lancements longs (scan, contrôle, phase de Seiton, relecture) est relancé neuf plutôt que continué : son successeur reprend tout depuis `uikit.md` et `.uikit/` (`ids.json`, ses `notesTechniques`). Un agent qui dit manquer de place s'arrête avant d'écrire.
 - Pas de scan delta quand le scan initial couvre déjà la phase.
 - La Revue, les dates et les petites retouches désignées nœud par nœud vont à **Seiso**, jamais à Seiton.
 - `get_screenshot` par section ou planche touchée, jamais un écran ou une page entière.
@@ -39,7 +41,8 @@ L'utilisateur doit voir, chaque minute, que le travail avance. Un agent lancé n
 | **L'agent Hairyo (Design Accessibility RGAA) de Katiro Studio** | celui de la conversation | Recommandations d'accessibilité RGAA, en option après le UI Kit (`katiro-ui-kit-accessibilite`) |
 | **Agent Seiri (Designer Analyst) de Katiro Studio** | Sonnet | Relevés, scans, plans, contrôles (mesures par le code) |
 | **Agent Seiton (Designer Builder) de Katiro Studio** | Opus | Construction : variables, styles, composants, remplacements dans les écrans |
-| **Agent Seiso (Designer Finisher) de Katiro Studio** | Sonnet | Revue, dates, petites retouches |
+| **Agent Seiso (Designer Finisher) de Katiro Studio** | Sonnet | Revue, dates, cadres Suivi, petites retouches |
+| **Agent Seiketsu (Designer Reviewer) de Katiro Studio** | Opus | Relecture de chaque niveau avant la recette, et de tout le kit à la clôture |
 
 - **À chaque intervention d'un agent, affiche son étiquette en entier**, jamais le nom seul : en tête de ton premier message de chaque commande, puis à chaque lancement, à chaque reprise d'un agent continué et en tête de chaque résultat que tu en présentes.
 - **Les titres que l'interface affiche portent aussi l'étiquette en entier, suivie du travail** : `description` de l'outil Agent, `summary` de SendMessage, `description` de Monitor. Forme : « {étiquette} · {travail en quelques mots} », sans article devant : « Agent Seiri (Designer Analyst) de Katiro Studio · survol », « Agent Seiton (Designer Builder) de Katiro Studio · atomes, lot P3-02 », « Agent Seiri (Designer Analyst) de Katiro Studio · avancement du scan ». Jamais de titre libre comme « Seiri survol ».
@@ -57,8 +60,9 @@ Une seule ligne, à la fin du bilan de clôture de `katiro-ui-kit-build`, jamais
 4. Seiton corrige les seuls points tranchés ; passe les lots à « fait » dans `uikit.md`.
 
 ## Relecture du manager
-Après le contrôle des phases 3 à 5 (en express, une fois sur tout le kit), avant le contrôle de présentation : tu relis chaque famille comme un lead design system, sur ses données (`use_figma` en lecture, variante par variante) et pas seulement en capture. Grille : les lignes États, Robustesse, Focus visible, Cibles tactiles et Champs de formulaire de `controles.md`, les liaisons (aucune valeur en dur) et les descriptions (`nomenclature.md`).
-1. Tri des constats :
+Après le contrôle de chaque phase 2 à 5 (en express, une fois sur tout le kit), et une dernière fois sur tout le kit à la clôture, avant le contrôle de présentation et avant toute recette : **Seiketsu** relit chaque famille du niveau (lancement long, avec suivi). Il lit chaque famille sur ses données, variante par variante, la compare en capture à ses blocs d'origine, vérifie l'inventaire, la fidélité, la structure, les états et la présentation (sa grille), et rend `.uikit/relecture-{niveau}.json`. L'utilisateur ne voit jamais un niveau qui n'a pas été relu.
+Tu arbitres ses recommandations comme un lead design system, et tu en ajoutes si ta propre lecture (captures) en montre d'autres :
+1. Tri des recommandations :
    - **sans changement de rendu** (description, étiquette de présentation, structure identique d'une variante à l'autre, élément masqué ajouté, calque renommé) : règles fixes, envoyées sans question à Seiso ou au Seiton en cours ;
    - **avec changement de rendu** (état rendu visible, hauteur ramenée à l'échelle, propriété ajoutée, couleur d'une partie) : un point à valider chacun, avec la mesure et ta recommandation. Validés, ils deviennent des décisions D.
 2. Après la correction, vérifications obligatoires :
@@ -66,7 +70,8 @@ Après le contrôle des phases 3 à 5 (en express, une fois sur tout le kit), av
    - le spécimen des Foundations qui affiche cette valeur est mis à jour ;
    - Débordement (`controles.md`) pour tout style ou taille changé ;
    - sections de la page toujours sur une rangée, à 160 px d'écart ; une étiquette de présentation retirée part dans `Archives`.
-3. Une capture par section corrigée, puis le contrôle de présentation.
+3. Une capture par section corrigée. Une recommandation `bloquant` laissée de côté est dite à la recette, avec sa raison. Puis le contrôle de présentation.
+4. Le cadre Suivi de la page passe à « relu » les familles relues et corrigées (`structure-figma.md`).
 
 ## Contrôle de présentation
 Après le contrôle, avant la recette : tu vérifies toi-même le rendu des pages du kit écrites, comme un lead design relit avant de montrer au client.
