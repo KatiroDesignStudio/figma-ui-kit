@@ -4,7 +4,7 @@ Trois schémas pour comprendre le plugin : qui fait quoi, le parcours complet av
 
 ## 1. Qui fait quoi
 
-Kanshu est le manager : c'est le seul agent qui te parle de la construction du kit, et il ne fait rien sans ton accord. Il confie le travail à quatre agents spécialisés, qui ne décident jamais. Shindan (diagnostic) et Hairyo (accessibilité) travaillent à part, avant et après le chantier.
+Shindan, Kanshu et Hairyo sont trois rôles de la même conversation, un par commande : ce sont les seuls qui te parlent, et ils ne font rien sans ton accord. Ils partagent un seul état, `uikit.md` et le dossier `.uikit/` du chantier : ce que l'un relève sert à l'autre. Ils confient le travail à quatre agents partagés, un par compétence, qui ne décident jamais. Chaque rôle n'appelle que ceux dont il a besoin.
 
 ```mermaid
 flowchart TB
@@ -13,16 +13,16 @@ flowchart TB
     subgraph managers["Ceux qui te parlent"]
         direction LR
         SH["<b>Shindan</b><br/>Figma Auditor<br/>mesure l'état du fichier"]
-        K["<b>Kanshu</b><br/>Design System Manager<br/>te fait valider, pilote, contrôle"]
+        K["<b>Kanshu</b><br/>Design System Manager<br/>te fait valider, pilote, arbitre"]
         HA["<b>Hairyo</b><br/>Accessibility Designer<br/>recommande, sans rien modifier"]
     end
 
     subgraph equipe["Les agents de travail, qui ne décident jamais"]
         direction LR
-        SI["<b>Seiri</b> · Design System Analyst<br/>Sonnet · lecture seule<br/>survol, inventaire, scan, contrôle"]
+        SI["<b>Seiri</b> · Design System Analyst<br/>Sonnet · lecture seule<br/>survol, scan, inventaire, bilan"]
         ST["<b>Seiton</b> · Figma Component Builder<br/>Sonnet puis Opus<br/>construit ce qui est validé"]
-        SO["<b>Seiso</b> · Design System Optimizer<br/>Sonnet<br/>Revue, Suivi, petites retouches"]
-        SK["<b>Seiketsu</b> · Design System Reviewer<br/>Sonnet · lecture seule<br/>relit avant chaque recette"]
+        SO["<b>Seiso</b> · Design System Optimizer<br/>Sonnet<br/>Revue et Suivi, après chaque recette"]
+        SK["<b>Seiketsu</b> · Design System Reviewer<br/>Sonnet · lecture seule<br/>vérifie avant chaque recette"]
     end
 
     U <-->|"questions,<br/>validations, recettes"| K
@@ -41,11 +41,11 @@ Les noms suivent les 5S japonais : Seiri (trier), Seiton (ranger), Seiso (nettoy
 
 ## 2. Le parcours complet et ce qu'il livre
 
-Chaque étape se lance par une commande, et chacune se termine par une question : c'est toi qui décides de la suite.
+Chaque étape se lance par une commande, et chacune se termine par une question : c'est toi qui décides de la suite. Le diagnostic est obligatoire : la construction refuse de commencer sans lui, puis reprend son relevé au lieu de le refaire. Il compare les écrans à un catalogue de composants de référence, selon le type de produit, et reconnaît les éléments par leur structure et leur contenu, pas par le nom des calques.
 
 ```mermaid
 flowchart LR
-    D["<b>Diagnostic</b><br/>/figma-ui-kit:diagnostic"]
+    D["<b>Diagnostic</b> · obligatoire<br/>/figma-ui-kit:diagnostic"]
     B["<b>Construction du kit</b><br/>/figma-ui-kit:build<br/>fondations, atomes,<br/>molécules, organismes"]
     S{"Le kit est terminé.<br/>Qu'est-ce que tu veux<br/>faire maintenant ?"}
     R["Regarder le kit<br/>seul ou en équipe"]
@@ -53,13 +53,14 @@ flowchart LR
     T["<b>Appliquer le kit aux écrans</b><br/>/figma-ui-kit:templates<br/>un écran ou un parcours à la fois"]
     P["Reprendre un point du kit"]
 
-    D -->|"Je lance le chantier ?"| B
+    D -->|"Je lance le chantier ?<br/>survol et scan repris"| B
     B --> S
     S --> R
     S --> A
     S --> T
     S --> P
     P --> B
+    A -.->|"corrections du kit<br/>en questions ouvertes"| B
 
     LD[/"diagnostic-pre-ui-kit.md<br/>état chiffré du fichier"/]
     LB[/"Pages Figma : Revue, Arborescence,<br/>UI Kit · Foundations, Atoms,<br/>Molecules, Organisms, Archives<br/>+ uikit.md, toutes les décisions"/]
@@ -76,38 +77,28 @@ Tes écrans d'origine ne sont jamais modifiés : le kit est appliqué à des cop
 
 ## 3. La boucle de chaque étape
 
-Le kit se construit par étapes : fondations, puis atomes, puis molécules, puis organismes. Chaque étape suit la même boucle, et tu ne vois une étape qu'une fois contrôlée et relue.
+Le kit se construit par étapes : fondations, puis atomes, puis molécules, puis organismes (ou d'une seule traite, avec une seule boucle pour tout le kit). Chaque étape suit la même boucle, et tu ne vois une étape qu'une fois vérifiée.
 
 ```mermaid
 flowchart TB
-    I["<b>Inventaire</b> · Seiri<br/>tous les blocs des écrans,<br/>avec leurs variantes observées"]
+    I["<b>Inventaire</b> · Seiri<br/>tous les blocs des écrans,<br/>leurs variantes et les trous"]
     IV{{"Tu valides la liste<br/>des composants"}}
     DE{{"Tu valides les décisions<br/>récapitulatif avec recommandations"}}
     C["<b>Construction</b> · Seiton<br/>lot par lot, chaque variante cochée"]
-    CT["<b>Contrôle</b> · Seiri<br/>liaisons, nommage, états,<br/>contrastes, couverture"]
-    RL["<b>Relecture</b> · Seiketsu<br/>fidélité aux écrans, structure,<br/>variantes, présentation"]
+    VE["<b>Vérification</b> · Seiketsu<br/>mesures, fidélité aux écrans,<br/>structure, présentation"]
     DO{{"Tu tranches les doutes<br/>qui changent le rendu"}}
-    CO["<b>Corrections</b><br/>Seiton ou Seiso"]
     RE{{"<b>Recette</b><br/>Je valide ?"}}
-    NX(["Étape suivante<br/>Suivi en Accepted, Revue à jour"])
+    SU["<b>Suivi</b> · Seiso<br/>Revue, cadres Suivi, dates"]
+    NX(["Étape suivante"])
 
-    I --> IV --> DE --> C --> CT
-    CT -->|"écart à une décision"| C
-    CT --> RL
-    RL -->|"sans changement de rendu"| CO
-    RL -->|"change le rendu"| DO --> CO
-    CO --> CT
-    RL -->|"tout est bon"| RE
-    RE -->|"Je valide"| NX
+    I --> IV --> DE --> C --> VE
+    VE -->|"écart sans décision<br/>2 allers-retours au plus"| C
+    VE -->|"change le rendu"| DO --> C
+    VE -->|"tout est bon"| RE
+    RE -->|"Je valide"| SU --> NX
     RE -->|"À reprendre"| DE
 ```
 
-Pendant tout ce temps, un cadre **Suivi** en tête de chaque page du kit montre où en est chaque composant :
+En tête de chaque page du kit, un cadre **Suivi** montre l'état de chaque composant : `Accepted` (validé à la recette), `On hold` (bloqué par une décision), ou `Built` (construit, en attente de recette). Le détail du travail en cours reste dans `uikit.md`.
 
-```mermaid
-flowchart LR
-    TD["To do"] --> IP["In progress"] --> BU["Built"] --> RV["Reviewed"] --> AC["Accepted"]
-    BU -.-> OH["On hold<br/>bloqué par une décision"]
-```
-
-À la fin du chantier, Seiketsu relit tout le kit une dernière fois, Seiri recompte tout pour le bilan avant → après, et Seiso met la Revue à jour.
+À la fin du chantier, Seiri recompte tout pour le bilan avant → après, et Seiso met la Revue à jour. En mode phase par phase, Seiketsu vérifie d'abord la cohérence entre les niveaux.

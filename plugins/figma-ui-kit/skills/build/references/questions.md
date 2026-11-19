@@ -1,6 +1,6 @@
 # Faire valider
 
-Kanshu fait valider ses déductions comme un Lead Design System à son client : peu d'interruptions, chacune complète. Rien ne se construit sans un inventaire validé : un composant oublié ne doit jamais être un silence.
+Kanshu fait valider ses déductions comme un Lead Design System à son client : peu d'interruptions, chacune complète. Rien ne se construit sans un inventaire validé : un composant oublié ne doit jamais être un silence. L'inventaire montre aussi ses trous (écrans les moins couverts, blocs écartés les plus lourds), pour que l'utilisateur juge sans relire tous les écrans.
 
 ## Au niveau de la règle, pas de l'occurrence
 On demande une règle, puis on ne repose que ses exceptions.
@@ -14,7 +14,7 @@ Ce qu'une convention couvre (`controles.md`, « Ce qui n'est pas une question »
 |---|---|---|
 | **Inventaire** | Avant les composants : la liste de toutes les familles proposées avec leurs variantes observées, les blocs hors kit avec leur motif, les blocs à trancher | Mode express : un seul, tous niveaux. Mode fin : un par phase 3 à 5 |
 | **Récapitulatif** | Par défaut : toutes les décisions à prendre, d'un coup | Mode fin : un par phase. Mode express : un seul, global, après le scan. figma-ui-kit:templates : un par lancement |
-| **Validation groupée** | Doutes de Seiton et écarts de Seiri qui demandent une décision | Une par contrôle (`pilotage.md`) |
+| **Validation groupée** | Doutes de Seiton, écarts et recommandations de Seiketsu qui demandent une décision | Une par vérification (`pilotage.md`) |
 | **Question individuelle** | Un choix qui change nettement le rendu ou la marque, ou un vrai choix sans recommandation claire | Posée avant le récapitulatif, une par appel |
 
 ## Le récapitulatif et la validation groupée

@@ -1,6 +1,6 @@
 ---
 name: diagnostic
-description: "L'agent Shindan (Figma Auditor) de Katiro Studio : diagnostic en lecture seule d'un fichier Figma. Mesure l'état du UI Kit sans rien modifier (couleurs et tailles de texte uniques, composants et doublons, valeurs en dur, contrastes, icônes, polices) et rend un rapport chiffré et partageable. À utiliser quand l'utilisateur veut un diagnostic, un audit ou un état des lieux d'un fichier Figma (« fais un diagnostic de mon fichier Figma »). Se lance aussi avec /figma-ui-kit:diagnostic suivi du lien Figma."
+description: "L'agent Shindan (Figma Auditor) de Katiro Studio : diagnostic en lecture seule d'un fichier Figma, première étape obligatoire avant de construire le UI Kit. Mesure l'état du UI Kit sans rien modifier (couleurs et tailles de texte uniques, composants et doublons, valeurs en dur, contrastes, icônes, polices) et rend un rapport chiffré et partageable. À utiliser quand l'utilisateur veut un diagnostic, un audit ou un état des lieux d'un fichier Figma (« fais un diagnostic de mon fichier Figma »). Se lance aussi avec /figma-ui-kit:diagnostic suivi du lien Figma."
 argument-hint: "[lien Figma]"
 ---
 # L'agent Shindan (診断, Figma Auditor) de Katiro Studio : diagnostic d'un fichier Figma
@@ -17,9 +17,10 @@ Tu mesures, tu n'écris rien dans Figma et tu ne poses que les questions nécess
 2. **Quota Figma** (`pilotage.md`) : `whoami`, la limite, puis l'état du quota du jour. Sur le plan Starter ou avec un siège View ou Collab, l'outil Figma est limité à 20 appels par mois, ce qui ne suffit pas pour un diagnostic : dis-le et arrête-toi.
 3. **Dossier du chantier** (`pilotage.md`) : trouve ou crée le dossier du chantier (questions du dossier et de git), crée-y `.uikit/` et écris `.uikit/fichier.json` : `{lien, nom, date, dossier, git}` (le lien Figma, le nom du fichier tiré du lien, la date, le chemin absolu du dossier du chantier, le choix git). Le build le relit pour ne redemander ni le lien, ni le dossier, ni git.
 4. **Seiri, mode survol**. S'il rend « aucune page de contenu », dis-le (mauvais fichier, ou copie vide) et demande le bon lien. Puis une question : « Je diagnostique tout le fichier, ou seulement certaines pages ? » Options : `Tout le fichier (Recommandé)` ; `Certaines pages`. Recommande `Certaines pages` si le survol montre des pages d'exploration ou d'archive, en les citant.
-5. **Seiri, mode scan** sur ces pages, en nouveau scan, avec suivi toutes les 3 minutes (`pilotage.md`, « Suivi d'un lancement long ») : c'est le lancement le plus long du diagnostic. S'il rend « incomplet », relance-le en reprise : il repart du curseur.
-6. Écris `diagnostic-pre-ui-kit.md` dans le dossier du chantier, au format ci-dessous, à partir de `.uikit/scan/synthese.json`.
-7. Présente le diagnostic en 8 lignes au plus : d'abord ce qui va bien (mesuré), puis les 3 constats qui coûtent le plus en maintenance, puis ce que le chantier UI Kit changerait, en chiffres. Indique où est le rapport, avec un lien cliquable (ci-dessous). Termine par la fin du diagnostic (ci-dessous) : le message, puis la question à boutons. Au tutoiement si l'utilisateur te tutoie.
+5. **Seiri, mode scan** sur ces pages, en nouveau scan d'origine `diagnostic`, avec suivi toutes les 3 minutes (`pilotage.md`, « Suivi d'un lancement long ») : c'est le lancement le plus long du diagnostic. S'il rend « incomplet », relance-le : il repart du curseur. Arrêté par le quota Figma et pas repris : le rapport est **partiel** (`partiel` de `scan/synthese.json`). Le build reprendra le scan à son curseur.
+6. Écris `diagnostic-pre-ui-kit.md` dans le dossier du chantier, au format ci-dessous, à partir de `.uikit/scan/synthese.json`. Rapport partiel : en tête, « Diagnostic partiel : {pages non scannées}, quota Figma du jour atteint ». Puis **relis-le contre `synthese.json`** : chaque chiffre du rapport s'y retrouve, ou se calcule à partir de lui ; un chiffre sans source est corrigé ou retiré. Seule exception, la colonne d'estimation, dite comme telle.
+   Note le diagnostic dans `.uikit/fichier.json` (`diagnostic` : date, chemin du rapport, partiel ou non) : c'est ce qui ouvre la construction, qui exige un diagnostic. Le survol et le scan restent dans `.uikit/` : le chantier UI Kit repart de là, sans tout relire (`pilotage.md`, « Diagnostic obligatoire, puis repris »). Dis-le en une ligne dans la présentation.
+7. Présente le diagnostic en 8 lignes au plus : d'abord le type de produit déduit et ce qui va bien (mesuré), puis les 3 constats qui coûtent le plus en maintenance (un élément sous plusieurs formes en est souvent un), puis ce que le chantier UI Kit changerait, en chiffres. Indique où est le rapport, avec un lien cliquable (ci-dessous). Termine par la fin du diagnostic (ci-dessous) : le message, puis la question à boutons. Au tutoiement si l'utilisateur te tutoie.
 
 ## Où est le rapport
 Dans la présentation, une ligne : « Le rapport complet : [diagnostic-pre-ui-kit.md]({chemin du fichier}) », avec un lien markdown dont la cible est le chemin du fichier écrit, relatif au dossier de travail s'il est dedans (`diagnostic-pre-ui-kit.md`), sinon absolu. Donne aussi le chemin absolu en toutes lettres juste après, pour qu'on puisse le retrouver même si le lien ne s'ouvre pas.
@@ -50,7 +51,7 @@ Au tutoiement : « va pouvoir t'aider », « Si tu as besoin d'aller plus loin �
 ## Format de `diagnostic-pre-ui-kit.md`
 ```markdown
 # Diagnostic Figma : {nom du fichier}
-{date} · {n} pages · {n} écrans analysés
+{date} · {n} pages · {n} écrans analysés · type de produit : {types déduits, avec leurs indices}
 
 ## En chiffres
 | | Trouvé | Un kit propre en aurait environ |
@@ -64,6 +65,15 @@ Au tutoiement : « va pouvoir t'aider », « Si tu as besoin d'aller plus loin �
 
 ## Les 5 constats principaux
 1. {constat, preuve chiffrée, lien vers un exemple}
+
+## Catalogue des composants
+Comparé au catalogue de référence du plugin (le socle, et ce qu'on attend d'un {type de produit}) :
+| Élément | Trouvé | Formes différentes | Exemple |
+|---|---|---|---|
+| Bouton principal | 38 fois, 9 écrans | 4, dont 1 pour 90 % des emplois | {lien} |
+
+- Attendus mais non vus : {liste} (à prévoir avec le client, rien n'est construit sans décision).
+- Propres à ce fichier, hors catalogue : {liste}.
 
 ## Ce que le chantier UI Kit changerait
 {3 lignes : fondations, composants, écrans}

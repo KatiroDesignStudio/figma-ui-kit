@@ -66,7 +66,7 @@ Règles fixes du plugin : nomenclature, structure, contrôles (dossier `referenc
 -
 
 ## Suivi des familles
-Tiré de l'inventaire validé, recopié dans le cadre Suivi de chaque page du kit. États : à faire, en cours, construit, relu, validé, mis de côté.
+Tiré de l'inventaire validé. États : à faire, en cours, construit, validé, mis de côté. Le cadre Suivi de chaque page du kit n'en montre que construit, validé et mis de côté (`Built`, `Accepted`, `On hold`) ; à faire et en cours n'y figurent pas.
 
 | Famille | Niveau | Variantes observées | État | Décision |
 |---|---|---|---|---|
