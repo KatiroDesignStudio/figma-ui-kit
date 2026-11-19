@@ -45,12 +45,12 @@ Chaque étape se lance par une commande, et chacune se termine par une question 
 
 ```mermaid
 flowchart LR
-    D["<b>Diagnostic</b><br/>/katiro-ui-kit-diagnostic"]
-    B["<b>Construction du kit</b><br/>/katiro-ui-kit-build<br/>fondations, atomes,<br/>molécules, organismes"]
+    D["<b>Diagnostic</b><br/>/figma-ui-kit:diagnostic"]
+    B["<b>Construction du kit</b><br/>/figma-ui-kit:build<br/>fondations, atomes,<br/>molécules, organismes"]
     S{"Le kit est terminé.<br/>Qu'est-ce que tu veux<br/>faire maintenant ?"}
     R["Regarder le kit<br/>seul ou en équipe"]
-    A["<b>Accessibilité</b><br/>/katiro-ui-kit-accessibilite"]
-    T["<b>Appliquer le kit aux écrans</b><br/>/katiro-ui-kit-templates<br/>un écran ou un parcours à la fois"]
+    A["<b>Accessibilité</b><br/>/figma-ui-kit:accessibilite"]
+    T["<b>Appliquer le kit aux écrans</b><br/>/figma-ui-kit:templates<br/>un écran ou un parcours à la fois"]
     P["Reprendre un point du kit"]
 
     D -->|"Je lance le chantier ?"| B

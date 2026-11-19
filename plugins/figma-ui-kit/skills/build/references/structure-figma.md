@@ -1,12 +1,12 @@
 # Structure du UI Kit dans Figma
 
-Règle fixe du plugin. Seiton la met en place en phase 1 de `katiro-ui-kit-build` ; `Écrans kit` est créée par `katiro-ui-kit-templates` au premier écran qui reçoit le kit.
+Règle fixe du plugin. Seiton la met en place en phase 1 de `figma-ui-kit:build` ; `Écrans kit` est créée par `figma-ui-kit:templates` au premier écran qui reçoit le kit.
 
 ## Pages, dans cet ordre, en tête du fichier
 | Page | Contenu |
 |---|---|
 | `Revue` | Le compte rendu du chantier, en tête du fichier : il tient lieu de couverture (nom du projet, date, chiffres avant et après, liens vers les pages) |
-| `Accessibilité` | Seulement si `katiro-ui-kit-accessibilite` a été lancé : les recommandations RGAA |
+| `Accessibilité` | Seulement si `figma-ui-kit:accessibilite` a été lancé : les recommandations RGAA |
 | `Arborescence` | Les écrans de référence et leurs parcours |
 | `UI Kit · Foundations` | Colors, Typography, Spacing, Radius, Borders, Opacity, Shadows, Grids, Icons |
 | `UI Kit · Atoms` | |
@@ -49,7 +49,7 @@ Pages `UI Kit · …` : tout le texte de présentation est **en anglais** (titre
 
 ## Mise en page commune
 - Chaque page du kit commence par un cadre titre : fil `UI Kit → {page}`, nom de la page, `Updated {date}`. Pas de ligne de description.
-- Sous le cadre titre, un cadre **Suivi** (`suivi`) : la liste de travail de la page, tirée de l'inventaire validé (pour Foundations : une ligne par planche). Un tableau `Family`, `Observed variants` (nombre), `Status`, avec un lien vers la section. Statuts, dans cet ordre : `To do` (inventaire validé), `In progress`, `Built` (toutes les variantes observées cochées par Seiton), `Reviewed` (relu par Seiketsu, corrections faites), `Accepted` (recette de l'utilisateur) ; un élément mis de côté : `On hold`, avec la décision qui le bloque. Créé par Seiso dès l'inventaire du niveau validé (pour Foundations, dès les planches décidées), sans liens tant que les sections n'existent pas ; mis à jour par Seiso après la construction (liens ajoutés), après la relecture et après la recette. États en français dans `uikit.md`, en anglais ici (correspondance : `katiro-seiso.md`). Les sections des familles commencent sous le cadre Suivi.
+- Sous le cadre titre, un cadre **Suivi** (`suivi`) : la liste de travail de la page, tirée de l'inventaire validé (pour Foundations : une ligne par planche). Un tableau `Family`, `Observed variants` (nombre), `Status`, avec un lien vers la section. Statuts, dans cet ordre : `To do` (inventaire validé), `In progress`, `Built` (toutes les variantes observées cochées par Seiton), `Reviewed` (relu par Seiketsu, corrections faites), `Accepted` (recette de l'utilisateur) ; un élément mis de côté : `On hold`, avec la décision qui le bloque. Créé par Seiso dès l'inventaire du niveau validé (pour Foundations, dès les planches décidées), sans liens tant que les sections n'existent pas ; mis à jour par Seiso après la construction (liens ajoutés), après la relecture et après la recette. États en français dans `uikit.md`, en anglais ici (correspondance : `seiso.md`). Les sections des familles commencent sous le cadre Suivi.
 - Une **section Figma** par famille (`Button`, `TextField`…), dans l'ordre alphabétique, **sur une seule ligne, de gauche à droite** : toutes alignées en haut, sous le cadre Suivi, à 160 px les unes des autres. Jamais empilées : une section qui grandit (une variante, un état de plus) s'étend vers le bas, sans recouvrir sa voisine. Les sections ne s'agrandissent pas seules : Seiton les redimensionne, puis recale à 160 px toutes celles qui suivent sur la ligne.
 - **Composants interactifs** (Button, Link, Checkbox, Radio, Switch, Input, Textarea, Select…) : le component set est rangé **en tableau**. Colonnes = les états, dans l'ordre de `nomenclature.md` (`default`, `hover`, `pressed`, `focus`, `disabled`), puis `status=error`. Lignes = les variantes (`primary`, `secondary`, `tertiary` ; `checked=false`, `true`, `indeterminate`), regroupées par taille sous un intertitre (`lg`, `md`, `sm`) ; avec une icône, un second bloc de colonnes « avec icône ». Étiquettes des colonnes au-dessus et des lignes à gauche, hors du component set, dans la section, sur les styles du kit (étiquette). Écarts réguliers, cellules alignées.
 - Dans chaque section : le component set, et au-dessus son nom seul. Un composant prévu pour fond sombre est présenté sur `color/bg/inverse`.
@@ -100,7 +100,7 @@ Une **planche** par fondation : un cadre en auto-layout sur `color/bg/default`, 
 - **Décisions du kit**, sous les trois colonnes : une ligne par décision, `{thème} · {décision} · {date}`, cadre `section/Décisions du kit`. Seulement les décisions qu'on ne voit pas dans le kit lui-même et qu'une reprise reposerait sinon : périmètre et exclusions, arborescence, police, règles de dérivation des états, exceptions d'échelle, noms gardés hors format, points à trancher en appliquant le kit aux écrans, points reportés. Pas ce qui se voit dans les composants (un état ajouté, un nom corrigé). Environ 10 à 15 lignes. Mis à jour à chaque passage de la Revue. C'est la mémoire du projet qui voyage avec le fichier : `uikit.md` reste le détail, sur la machine du chantier.
 
 ## Accessibilité
-- En tête, en évidence : l'avertissement de `katiro-ui-kit-accessibilite` (une aide, pas un audit, ni taux ni déclaration de conformité ; audit par un expert pour aller plus loin), puis « RGAA 4.1.2 · {date} · Agent Hairyo (Accessibility Designer) de Katiro Studio ».
+- En tête, en évidence : l'avertissement de `figma-ui-kit:accessibilite` (une aide, pas un audit, ni taux ni déclaration de conformité ; audit par un expert pour aller plus loin), puis « RGAA 4.1.2 · {date} · Agent Hairyo (Accessibility Designer) de Katiro Studio ».
 - Trois colonnes : **À corriger** (une carte par critère : intitulé court, constat, correction, lien vers un exemple et vers le critère), **À prévoir pour le développement** (une carte par écran ou « Tous les écrans »), **Respecté sur la maquette** (une carte, la liste des critères).
 - Une ligne en pied : « {n} critères non évaluables sur maquette, {n} non applicables : voir accessibilite-rgaa.md ».
 - Recréée à chaque lancement, l'ancienne version part dans `Archives`. Elle ne touche ni le kit ni les écrans.

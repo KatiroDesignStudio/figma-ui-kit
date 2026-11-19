@@ -1,4 +1,4 @@
-# Katiro UI Kit
+# Figma UI Kit
 
 [Français](#français) · [English](#english)
 
@@ -47,7 +47,7 @@ Puis, dans Claude Code, tape `/mcp`, choisis `figma` et connecte ton compte.
 claude plugin marketplace add KatiroDesignStudio/katiro-claude-code-plugins
 ```
 ```bash
-claude plugin install katiro-ui-kit@katiro-studio
+claude plugin install figma-ui-kit@katiro-studio
 ```
 Puis ouvre une nouvelle session Claude Code.
 
@@ -56,7 +56,7 @@ Puis ouvre une nouvelle session Claude Code.
 claude plugin marketplace update katiro-studio
 ```
 ```bash
-claude plugin update katiro-ui-kit@katiro-studio
+claude plugin update figma-ui-kit@katiro-studio
 ```
 
 ### Utiliser
@@ -65,10 +65,10 @@ claude plugin update katiro-ui-kit@katiro-studio
 
 | Tu écris | Ce qui se passe | Modifie Figma ? | Commande |
 |---|---|---|---|
-| « Fais un diagnostic de mon fichier Figma : {lien} » | Un rapport chiffré de l'état du fichier | Non | `/katiro-ui-kit-diagnostic` |
-| « Range le UI Kit de mon fichier Figma : {lien} » | Le kit est reconstruit au propre, étape par étape | Oui, pages du kit seulement | `/katiro-ui-kit-build` |
-| « Applique le UI Kit à l'écran Accueil » | Les composants du kit sont posés dans une copie de l'écran | Oui, copies seulement | `/katiro-ui-kit-templates` |
-| « Fais-moi des recommandations d'accessibilité » | Des recommandations RGAA 4.1.2, en rapport et en page Accessibilité. Une aide, pas un audit. | Ajoute une page | `/katiro-ui-kit-accessibilite` |
+| « Fais un diagnostic de mon fichier Figma : {lien} » | Un rapport chiffré de l'état du fichier | Non | `/figma-ui-kit:diagnostic` |
+| « Range le UI Kit de mon fichier Figma : {lien} » | Le kit est reconstruit au propre, étape par étape | Oui, pages du kit seulement | `/figma-ui-kit:build` |
+| « Applique le UI Kit à l'écran Accueil » | Les composants du kit sont posés dans une copie de l'écran | Oui, copies seulement | `/figma-ui-kit:templates` |
+| « Fais-moi des recommandations d'accessibilité » | Des recommandations RGAA 4.1.2, en rapport et en page Accessibilité. Une aide, pas un audit. | Ajoute une page | `/figma-ui-kit:accessibilite` |
 
 Ton fichier a déjà un kit ? L'agent propose de le compléter, de le vérifier ou de le reconstruire, sans changer le rendu de ses composants.
 
@@ -145,7 +145,7 @@ Then, in Claude Code, type `/mcp`, pick `figma` and sign in.
 claude plugin marketplace add KatiroDesignStudio/katiro-claude-code-plugins
 ```
 ```bash
-claude plugin install katiro-ui-kit@katiro-studio
+claude plugin install figma-ui-kit@katiro-studio
 ```
 Then start a new Claude Code session.
 
@@ -154,7 +154,7 @@ Then start a new Claude Code session.
 claude plugin marketplace update katiro-studio
 ```
 ```bash
-claude plugin update katiro-ui-kit@katiro-studio
+claude plugin update figma-ui-kit@katiro-studio
 ```
 
 ### Use
@@ -163,10 +163,10 @@ Type your request in Claude Code, with your Figma file link. The agents answer i
 
 | You type | What happens | Changes Figma? | Command |
 |---|---|---|---|
-| "Audit my Figma file: {link}" | A measured report on the state of the file | No | `/katiro-ui-kit-diagnostic` |
-| "Clean up the UI Kit of my Figma file: {link}" | The kit is rebuilt cleanly, step by step | Yes, kit pages only | `/katiro-ui-kit-build` |
-| "Apply the UI Kit to the Home screen" | Kit components are placed in a copy of the screen | Yes, copies only | `/katiro-ui-kit-templates` |
-| "Give me accessibility recommendations" | RGAA 4.1.2 recommendations, as a report and an Accessibility page. Guidance, not an audit. | Adds a page | `/katiro-ui-kit-accessibilite` |
+| "Audit my Figma file: {link}" | A measured report on the state of the file | No | `/figma-ui-kit:diagnostic` |
+| "Clean up the UI Kit of my Figma file: {link}" | The kit is rebuilt cleanly, step by step | Yes, kit pages only | `/figma-ui-kit:build` |
+| "Apply the UI Kit to the Home screen" | Kit components are placed in a copy of the screen | Yes, copies only | `/figma-ui-kit:templates` |
+| "Give me accessibility recommendations" | RGAA 4.1.2 recommendations, as a report and an Accessibility page. Guidance, not an audit. | Adds a page | `/figma-ui-kit:accessibilite` |
 
 Your file already has a kit? The agent offers to complete it, check it or rebuild it, without changing how its components render.
 

@@ -57,7 +57,7 @@ Inventaire validé : {date} · {n} familles, {n} hors kit (voir `.uikit/scan/inv
 Règles fixes du plugin : nomenclature, structure, contrôles (dossier `references/` du plugin).
 
 ### Règles (R)
-- R0 Périmètre : seuls les écrans retenus servent au kit et peuvent le recevoir. Aucun écran d'origine n'est jamais modifié : katiro-ui-kit-templates applique le kit à des copies, dans `Écrans kit`.
+- R0 Périmètre : seuls les écrans retenus servent au kit et peuvent le recevoir. Aucun écran d'origine n'est jamais modifié : figma-ui-kit:templates applique le kit à des copies, dans `Écrans kit`.
 - R1 Aucune couleur, typo, espacement, rayon, bordure, opacité, ombre ni grille hors variable ou style dans le kit.
 
 ### Décisions (D)

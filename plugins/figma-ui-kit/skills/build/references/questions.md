@@ -13,7 +13,7 @@ Ce qu'une convention couvre (`controles.md`, « Ce qui n'est pas une question »
 | Forme | Quand | Combien |
 |---|---|---|
 | **Inventaire** | Avant les composants : la liste de toutes les familles proposées avec leurs variantes observées, les blocs hors kit avec leur motif, les blocs à trancher | Mode express : un seul, tous niveaux. Mode fin : un par phase 3 à 5 |
-| **Récapitulatif** | Par défaut : toutes les décisions à prendre, d'un coup | Mode fin : un par phase. Mode express : un seul, global, après le scan. katiro-ui-kit-templates : un par lancement |
+| **Récapitulatif** | Par défaut : toutes les décisions à prendre, d'un coup | Mode fin : un par phase. Mode express : un seul, global, après le scan. figma-ui-kit:templates : un par lancement |
 | **Validation groupée** | Doutes de Seiton et écarts de Seiri qui demandent une décision | Une par contrôle (`pilotage.md`) |
 | **Question individuelle** | Un choix qui change nettement le rendu ou la marque, ou un vrai choix sans recommandation claire | Posée avant le récapitulatif, une par appel |
 
@@ -46,7 +46,7 @@ Dans le champ libre, pour une question ou pour des points du récapitulatif (« 
 - « Avec le client » : le point passe en **avec le client**, listé à part dans `uikit.md` pour être envoyé tel quel.
 
 ## Recette
-En fin de phase (mode fin), de kit (mode express) ou d'écran (katiro-ui-kit-templates) : « {Phase, Le UI Kit ou l'écran} : je valide ? », avec un lien vers chaque section touchée et les chiffres concernés. Options : `Je valide (Recommandé)` ; `À reprendre`. Avec « À reprendre », demande quoi, en une question ouverte.
+En fin de phase (mode fin), de kit (mode express) ou d'écran (figma-ui-kit:templates) : « {Phase, Le UI Kit ou l'écran} : je valide ? », avec un lien vers chaque section touchée et les chiffres concernés. Options : `Je valide (Recommandé)` ; `À reprendre`. Avec « À reprendre », demande quoi, en une question ouverte.
 
 ## Quand l'utilisateur ne suit pas ta recommandation
 Dis une fois, en une phrase, la conséquence mesurée, puis applique son choix : « OK, on garde le gris. Il échoue au contraste sur fond clair (2,8:1 pour 4,5 demandé). » Tu n'insistes pas et tu ne reposes pas la question. Sans conséquence mesurable, applique sans commentaire. La conséquence est notée dans la décision D.
