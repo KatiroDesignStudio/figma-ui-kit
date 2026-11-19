@@ -44,7 +44,7 @@ Puis, dans Claude Code, tape `/mcp`, choisis `figma` et connecte ton compte.
 ### Installer
 
 ```bash
-claude plugin marketplace add KatiroDesignStudio/katiro-plugins
+claude plugin marketplace add KatiroDesignStudio/katiro-claude-code-plugins
 ```
 ```bash
 claude plugin install katiro-ui-kit@katiro-studio
@@ -142,7 +142,7 @@ Then, in Claude Code, type `/mcp`, pick `figma` and sign in.
 ### Install
 
 ```bash
-claude plugin marketplace add KatiroDesignStudio/katiro-plugins
+claude plugin marketplace add KatiroDesignStudio/katiro-claude-code-plugins
 ```
 ```bash
 claude plugin install katiro-ui-kit@katiro-studio
