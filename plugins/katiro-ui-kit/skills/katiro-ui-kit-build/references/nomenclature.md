@@ -18,7 +18,7 @@ Logique BEM, traduite dans les outils natifs de Figma : un développeur lit `But
 ## Propriétés
 | Type | Nom | Valeurs |
 |---|---|---|
-| Variante | `variant`, `size`, `state`, `status`, `breakpoint`, en `camelCase` | minuscules, `kebab-case` |
+| Variante | `variant`, `size`, `state`, `status`, `breakpoint`, `theme`, en `camelCase` | minuscules, `kebab-case` |
 | Booléen | `selected`, `checked`, `showIcon`, `showBadge`… | `true` / `false` |
 | Texte | nom de l'élément : `label`, `helperText` | |
 | Échange d'instance | `iconLeading`, `iconTrailing`, `avatar` | |
@@ -26,10 +26,11 @@ Logique BEM, traduite dans les outils natifs de Figma : un développeur lit `But
 - `state` : interaction, dans cet ordre : `default`, `hover`, `pressed`, `focus`, `disabled`.
 - `status` : validation, séparée de `state` pour pouvoir combiner erreur et focus : `none`, `error`, `success`, `warning`.
 - `size` : `xs`, `sm`, `md`, `lg`, `xl`. La correspondance des tailles existantes est un point du récapitulatif.
+- `breakpoint` : `desktop`, `mobile` (et `tablet` s'il est relevé). `theme` : le fond sur lequel se pose le composant, `light` (fond clair) ou `dark` (fond foncé). Le logo de la marque porte les deux : `Logo` · `breakpoint=desktop` · `theme=light`.
 - Titre bicolore : propriétés texte `title` et `titleAccent`, booléen `showTitleAccent`, variante `accentPosition` (`end`, `start`).
 
 ## Calques
-En minuscules, `kebab-case`, choisis dans ce vocabulaire : `container`, `focus-ring`, `error-message`, `content`, `icon`, `icon-leading`, `icon-trailing`, `label`, `text`, `title`, `description`, `helper-text`, `error-text`, `input`, `placeholder`, `image`, `avatar`, `badge`, `indicator`, `divider`, `action`, `actions`, `overlay`, `tag`, `tag-group`, `text-accent`, `form`, `column`, `logo`, `decor`, `filter-bar`, `check-list`, `screenshot`.
+En minuscules, `kebab-case`, choisis dans ce vocabulaire : `container`, `focus-ring`, `error-message`, `content`, `icon`, `icon-leading`, `icon-trailing`, `label`, `text`, `title`, `description`, `helper-text`, `error-text`, `input`, `placeholder`, `image`, `avatar`, `badge`, `indicator`, `divider`, `action`, `actions`, `overlay`, `tag`, `tag-group`, `text-accent`, `form`, `column`, `logo`, `mark` (symbole du logo), `wordmark` (nom du logo), `decor`, `filter-bar`, `check-list`, `screenshot`.
 Un rôle hors vocabulaire est un doute pendant la construction (Seiton), un écart au contrôle (Seiri). Aucun nom généré par Figma (`Frame 247`, `Rectangle 12`).
 Pages de présentation (`Revue`, `Accessibilité`, `Arborescence`, `UI Kit · Foundations`) et cadre Suivi de chaque page du kit : les calques d'échantillon portent le nom du jeton montré (`color/violet/500`, `shadow/sm`) ; les cadres s'appellent `titre`, `suivi` (et ses lignes `ligne/{famille ou planche}`), `planche/{nom}` (`planche/colors`), `bloc/{nom}` (`bloc/primitives`), `ligne/{nom}`, `section/{nom}`, `colonne/{nom}`, `carte/{nom}`, `espace/{nom}`, `branche/{nom}`, `ecran/{nom}`. Dans `UI Kit · Atoms` à `UI Kit · Organisms`, une section de famille porte le nom du composant (`Button`).
 

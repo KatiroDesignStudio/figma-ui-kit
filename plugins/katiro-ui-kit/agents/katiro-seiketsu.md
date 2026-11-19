@@ -16,7 +16,7 @@ Lis `uikit.md` (décisions R et D), `.uikit/scan/inventaire.json`, `.uikit/ids.j
 - Compare en capture (`get_screenshot`) chaque famille à un ou deux de ses blocs d'origine dans les écrans (nœuds de `inventaire.json`), section par section, jamais un écran entier.
 
 ## Grille de relecture, famille par famille
-1. **Inventaire** : la famille couvre-t-elle toutes ses variantes observées ? Un bloc de l'inventaire relié à cette famille est-il reproductible avec ses propriétés ? Une famille de l'inventaire validé manque-t-elle au niveau relu ?
+1. **Inventaire** : la famille couvre-t-elle toutes ses variantes observées ? Un bloc de l'inventaire relié à cette famille est-il reproductible avec ses propriétés ? Une famille de l'inventaire validé manque-t-elle au niveau relu ? Au niveau atomes, `Logo` existe-t-il avec chaque version relevée et chaque version décidée (`breakpoint`, `theme`) ? Au niveau organismes, le header et le footer emploient-ils une instance de `Logo` plutôt qu'une copie du tracé ?
 2. **Fidélité** : à l'œil, comparé à l'origine : proportions, hiérarchie, alignements, espacements, rien de perdu (élément, icône, séparateur, état visible) ; chaque écart de rendu est soit fixé par une décision, soit une recommandation.
 3. **Structure** : niveau atomique juste (`structure-figma.md`), instances des familles du niveau inférieur plutôt qu'éléments redessinés, structure identique d'une variante à l'autre, auto-layout et redimensionnement cohérents (un Header s'étire, une carte suit son contenu), propriétés utiles et nommées selon `nomenclature.md`.
 4. **États et accessibilité** : états attendus présents et distincts, focus visible, cibles tactiles, champs de formulaire (`controles.md`).
