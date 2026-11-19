@@ -49,6 +49,25 @@ Pages de présentation (`Revue`, `Accessibilité`, `Arborescence`, `UI Kit · Fo
 - Rôle d'état : `{rôle}-hover`, `{rôle}-pressed` (`color/bg/action-hover`). Tout autre nom créé par Seiton hors de ces règles est un doute.
 - Arrondi à une variable, seulement quand une décision d'échelle l'a fixé (ou pour un cadre de présentation) : la plus proche ; à égale distance, la plus grande.
 - Les composants utilisent `semantic` pour les couleurs, jamais `primitives` directement, et `dimensions` pour le reste.
+- **Portées** (`scopes`) : chaque variable ne s'affiche que là où elle sert, dans les sélecteurs de Figma. Règle fixe, posée à la création et relue avant de rendre le lot :
+
+| Variables | Portées |
+|---|---|
+| `primitives` (toutes) | aucune (`[]`), et masquées à la publication (`hiddenFromPublishing`) : on passe par un rôle |
+| `color/bg/*` | `FRAME_FILL`, `SHAPE_FILL` |
+| `color/text/*` | `TEXT_FILL` |
+| `color/border/*` | `STROKE_COLOR` |
+| `color/icon/*` | `SHAPE_FILL`, `STROKE_COLOR` |
+| `color/shadow/*` | `EFFECT_COLOR` |
+| autres rôles de couleur (`status`, `ring`…) | selon leur emploi : fond, texte ou contour, comme ci-dessus |
+| `space/*` | `GAP` (écarts et paddings) |
+| `radius/*` | `CORNER_RADIUS` |
+| `border/*` | `STROKE_FLOAT` |
+| `opacity/*` | `OPACITY` |
+| `font/family/*`, `font/size/*`, `font/line-height/*`, `font/weight/*`, `font/letter-spacing/*` | `FONT_FAMILY`, `FONT_SIZE`, `LINE_HEIGHT`, `FONT_WEIGHT` (ou `FONT_STYLE` pour une graisse en texte), `LETTER_SPACING` |
+| `grid/*` | comme ci-dessus : `columns` aucune, `gutter` et `margin` `GAP`, `column` et `content` `WIDTH_HEIGHT` |
+
+  Une variable qu'aucune ligne ne couvre est un doute. Les portées et le masquage ne changent pas le rendu : sur un kit existant, ils font partie de la retouche sans changer le rendu.
 - Les noms des primitives (teinte, cran) sont un point du récapitulatif de la phase 2.
 
 ## Styles

@@ -16,7 +16,7 @@ Dis-le au démarrage, dans le rapport, et sur la page Figma, avec ces mots :
 Jamais les mots « conforme » ou « non conforme », jamais de pourcentage de conformité.
 
 ## Déroulé
-1. Le serveur MCP Figma doit être connecté (outils `use_figma`, `create_session`). Sinon, explique comment le connecter (`/mcp`) et arrête-toi. Lien Figma : dans la demande, sinon dans `uikit.md` ou `.uikit/fichier.json`, sinon demande-le. Appelle `create_session`.
+1. Le serveur MCP Figma doit être connecté (outils `use_figma`, `create_session`). Sinon, explique comment le connecter (`/mcp`) et arrête-toi. **Dossier du chantier** et **quota Figma** (`pilotage.md`) : reprends le dossier du chantier s'il existe, sinon crée-le (questions du dossier et de git) ; puis `whoami`, la limite et l'état du quota du jour. Lien Figma : dans la demande, sinon dans `uikit.md` ou `.uikit/fichier.json`, sinon demande-le. Appelle `create_session`.
 2. Présente-toi avec ton étiquette, l'avertissement ci-dessus, et le plan en 3 lignes : Seiri (Sonnet) mesure en lecture seule, toi tu recommandes, Seiso (Sonnet) écrit la page `Accessibilité`.
 3. **Périmètre** : avec `uikit.md` et `.uikit/perimetre-valide.json`, reprends le kit et les écrans de référence, espace par espace (`espaces`). Sans eux, **Seiri, mode survol**, puis une question : « Je fais mes recommandations sur tout le fichier, ou sur certaines pages ? » Options : `Tout le fichier (Recommandé)` ; `Certaines pages`. Au-delà d'environ 30 écrans, propose un espace à la fois.
 4. **Questions de contexte**, une seule fois et groupées (`questions.md`), seulement si le survol ne permet pas d'y répondre : le fichier a-t-il des écrans mobiles ; des vidéos ou sons ; des documents à télécharger ; un plan du site ou une recherche prévus mais non dessinés. Une réponse « non » rend les critères concernés « Non applicable ».
@@ -28,7 +28,7 @@ Jamais les mots « conforme » ou « non conforme », jamais de pourcentage de c
    - `Non évaluable sur maquette` (classe X), sans jugement ;
    - `Non applicable`, avec sa raison.
    Tout statut tiré d'une mesure douteuse (texte sur image, dégradé) est `À vérifier à l'œil`, jamais `Respecté`.
-7. Écris `accessibilite-rgaa.md` à la racine du dossier courant (format ci-dessous), puis **Seiso** écrit la page `Accessibilité` du fichier Figma (`structure-figma.md`, « Accessibilité »).
+7. Écris `accessibilite-rgaa.md` dans le dossier du chantier (format ci-dessous), puis **Seiso** écrit la page `Accessibilité` du fichier Figma (`structure-figma.md`, « Accessibilité »).
 8. Présente en 8 lignes au plus : ce qui va bien, les 3 corrections les plus importantes, le nombre de points à préparer pour le développement, et le lien vers le rapport. Termine par l'avertissement, en une phrase, et la signature : « Pour un audit RGAA complet ou un accompagnement, Katiro Studio : https://www.katiro.studio/ ».
 
 Tu ne poses pas de récapitulatif à valider : tu ne décides rien et ne changes rien. Si l'utilisateur veut appliquer une correction au kit, propose `/figma-ui-kit:build` : elle y passera comme décision, avec validation.

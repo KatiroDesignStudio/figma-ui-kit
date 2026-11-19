@@ -14,11 +14,11 @@ Tu mesures, tu n'écris rien dans Figma et tu ne poses que les questions nécess
 
 ## Déroulé
 1. Le serveur MCP Figma doit être connecté (outils `use_figma`, `create_session`). Sinon, explique comment le connecter (`/mcp`) et arrête-toi. Prends le lien Figma dans la demande, sinon demande-le, puis appelle `create_session` et transmets l'identifiant de session à Seiri.
-2. Rappelle le prérequis en une ligne : sur le plan Starter ou avec un siège View ou Collab, l'outil Figma est limité à 6 appels par mois, ce qui ne suffit pas pour un diagnostic.
-3. Crée `.uikit/` dans le dossier courant s'il n'existe pas, et écris-y `.uikit/fichier.json` : `{lien, nom, date}` (le lien Figma, le nom du fichier tiré du lien, la date). Le build le relit pour ne pas redemander le lien.
+2. **Quota Figma** (`pilotage.md`) : `whoami`, la limite, puis l'état du quota du jour. Sur le plan Starter ou avec un siège View ou Collab, l'outil Figma est limité à 20 appels par mois, ce qui ne suffit pas pour un diagnostic : dis-le et arrête-toi.
+3. **Dossier du chantier** (`pilotage.md`) : trouve ou crée le dossier du chantier (questions du dossier et de git), crée-y `.uikit/` et écris `.uikit/fichier.json` : `{lien, nom, date, dossier, git}` (le lien Figma, le nom du fichier tiré du lien, la date, le chemin absolu du dossier du chantier, le choix git). Le build le relit pour ne redemander ni le lien, ni le dossier, ni git.
 4. **Seiri, mode survol**. S'il rend « aucune page de contenu », dis-le (mauvais fichier, ou copie vide) et demande le bon lien. Puis une question : « Je diagnostique tout le fichier, ou seulement certaines pages ? » Options : `Tout le fichier (Recommandé)` ; `Certaines pages`. Recommande `Certaines pages` si le survol montre des pages d'exploration ou d'archive, en les citant.
-5. **Seiri, mode scan** sur ces pages, en nouveau scan, avec suivi chaque minute (`pilotage.md`, « Suivi d'un lancement long ») : c'est le lancement le plus long du diagnostic. S'il rend « incomplet », relance-le en reprise : il repart du curseur.
-6. Écris `diagnostic-pre-ui-kit.md` à la racine du dossier courant, au format ci-dessous, à partir de `.uikit/scan/synthese.json`.
+5. **Seiri, mode scan** sur ces pages, en nouveau scan, avec suivi toutes les 3 minutes (`pilotage.md`, « Suivi d'un lancement long ») : c'est le lancement le plus long du diagnostic. S'il rend « incomplet », relance-le en reprise : il repart du curseur.
+6. Écris `diagnostic-pre-ui-kit.md` dans le dossier du chantier, au format ci-dessous, à partir de `.uikit/scan/synthese.json`.
 7. Présente le diagnostic en 8 lignes au plus : d'abord ce qui va bien (mesuré), puis les 3 constats qui coûtent le plus en maintenance, puis ce que le chantier UI Kit changerait, en chiffres. Indique où est le rapport, avec un lien cliquable (ci-dessous). Termine par la fin du diagnostic (ci-dessous) : le message, puis la question à boutons. Au tutoiement si l'utilisateur te tutoie.
 
 ## Où est le rapport

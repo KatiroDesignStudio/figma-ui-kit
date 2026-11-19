@@ -1,7 +1,9 @@
 # UI Kit : {Projet}
 
 Fichier Figma : {lien}
-Plan et siège : {plan}, siège {siège}
+Plan et siège : {plan}, siège {siège} · quota Figma : {n} appels par jour
+Dossier du chantier : {chemin absolu}
+Git : {hors de git, versionné, pas de dépôt}
 Fichier de travail : {ce fichier, copie fournie}
 Mode : {express (d'une seule traite), fin (phase par phase)}
 Démarré le : {date} · Dernière session : {date}

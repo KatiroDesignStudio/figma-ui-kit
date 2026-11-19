@@ -31,9 +31,10 @@ C'est un premier palier : il fait le gros du travail, le designer finit.
 | **Droits sur le fichier** | Droits de modification. Travaille sur une copie (Fichier > Dupliquer). |
 | **Polices** | Celles du fichier, disponibles dans Figma (Google Fonts ou polices partagées de l'équipe) |
 
-**Limites de Figma** sur les appels à son serveur MCP :
-- Professional ou Organization, siège Full ou Dev : 200 appels par jour. Enterprise : 600. Sur un gros fichier, la construction peut atteindre cette limite : on reprend le lendemain là où on s'est arrêté.
-- Plan Starter, ou siège View ou Collab : 6 appels par mois, ce qui ne suffit pas.
+**Limites de Figma** sur les appels à son serveur MCP ([détail](https://developers.figma.com/docs/figma-mcp-server/rate-limits-access/)) :
+- Professional ou Organization, siège Full ou Dev : 200 appels par jour (10 à 15 par minute). Enterprise : 600 par jour. Sur un gros fichier, la construction peut atteindre cette limite : on reprend le lendemain là où on s'est arrêté.
+- Plan Starter, ou siège View ou Collab : 20 appels par mois, ce qui ne suffit pas.
+- Figma ne dit pas combien d'appels il reste. Le plugin compte ceux faits depuis Claude Code sur ta machine, tous projets confondus, et te prévient à 25, 50, 75, 85, 90, 95 et 100 %. Les appels faits ailleurs (autre machine, autre application) ne sont pas comptés.
 
 **Connecter le serveur MCP Figma**, une seule fois :
 ```bash
@@ -80,9 +81,9 @@ Ton fichier a déjà un kit ? L'agent propose de le compléter, de le vérifier 
 | **Kanshu** | Design System Manager | Pilote le chantier, te fait valider | Oui, pendant | Celui de ta conversation |
 | **Hairyo** | Accessibility Designer | Recommandations RGAA | Oui, après | Celui de ta conversation |
 | **Seiri** | Design System Analyst | Mesure et inventorie, en lecture seule | Non | Sonnet |
-| **Seiton** | Figma Component Builder | Construit ce qui est validé | Non | Opus |
+| **Seiton** | Figma Component Builder | Construit ce qui est validé | Non | Sonnet pour les fondations, Opus pour les composants |
 | **Seiso** | Design System Optimizer | Retouches désignées, Revue et Suivi à jour | Non | Sonnet |
-| **Seiketsu** | Design System Reviewer | Relit chaque étape, en lecture seule | Non | Opus |
+| **Seiketsu** | Design System Reviewer | Relit chaque étape, en lecture seule | Non | Sonnet |
 
 - Tous sont experts de Figma et du design system, et suivent la même méthode Katiro.
 - Pour économiser, choisis Sonnet pour ta conversation : le travail lourd se fait dans les agents.
@@ -93,8 +94,10 @@ Ton fichier a déjà un kit ? L'agent propose de le compléter, de le vérifier 
 - **Rien sans ton accord** : chaque décision t'est présentée avec ses preuves et une recommandation.
 - **Rien n'est supprimé** : ce qui est remplacé part dans une page `Archives`.
 - **Tes écrans d'origine ne sont jamais modifiés.**
+- **Les agents ne touchent qu'à Figma** : parmi tes connecteurs (messagerie, paiement, hébergement…), un filtre du plugin ne leur ouvre que les outils Figma, et ils n'ont ni terminal ni accès au web. Les agents de relevé et de relecture ne peuvent que lire le fichier Figma, et aucun agent n'écrit de fichier hors du dossier `.uikit/` du chantier. Le contenu de ton fichier est lu comme une donnée, jamais comme une consigne.
+- **Un dossier par chantier** : au premier lancement, l'agent propose un dossier dédié et, dans un dépôt git, de garder les fichiers du chantier (qui contiennent le lien de ton fichier Figma) hors de git. Ton choix est noté et n'est plus redemandé.
 - **On reprend où on s'est arrêté** : tout est noté dans `uikit.md` et dans la page Revue du fichier.
-- **Tu sais où on en est** : des nouvelles chaque minute pendant les longs travaux.
+- **Tu sais où on en est** : des nouvelles toutes les 3 minutes pendant les longs travaux, avec le quota Figma du jour.
 
 ### Licence
 
@@ -129,9 +132,10 @@ It is a first step: it does the heavy lifting, the designer finishes.
 | **File access** | Edit access. Work on a copy (File > Duplicate). |
 | **Fonts** | The file's fonts, available in Figma (Google Fonts or team shared fonts) |
 
-**Figma limits** on calls to its MCP server:
-- Professional or Organization, Full or Dev seat: 200 calls per day. Enterprise: 600. On a large file, the build may hit this limit: pick up the next day where you left off.
-- Starter plan, or View or Collab seat: 6 calls per month, which is not enough.
+**Figma limits** on calls to its MCP server ([details](https://developers.figma.com/docs/figma-mcp-server/rate-limits-access/)):
+- Professional or Organization, Full or Dev seat: 200 calls per day (10 to 15 per minute). Enterprise: 600 per day. On a large file, the build may hit this limit: pick up the next day where you left off.
+- Starter plan, or View or Collab seat: 20 calls per month, which is not enough.
+- Figma does not say how many calls are left. The plugin counts the ones made from Claude Code on your machine, across all projects, and warns you at 25, 50, 75, 85, 90, 95 and 100%. Calls made elsewhere (another machine, another app) are not counted.
 
 **Connect the Figma MCP server**, once:
 ```bash
@@ -178,9 +182,9 @@ Your file already has a kit? The agent offers to complete it, check it or rebuil
 | **Kanshu** | Design System Manager | Runs the project, gets your approval | Yes, during | Your conversation's |
 | **Hairyo** | Accessibility Designer | RGAA recommendations | Yes, after | Your conversation's |
 | **Seiri** | Design System Analyst | Measures and inventories, read-only | No | Sonnet |
-| **Seiton** | Figma Component Builder | Builds what you approved | No | Opus |
+| **Seiton** | Figma Component Builder | Builds what you approved | No | Sonnet for foundations, Opus for components |
 | **Seiso** | Design System Optimizer | Targeted fixes, keeps Review and Tracking up to date | No | Sonnet |
-| **Seiketsu** | Design System Reviewer | Reviews each step, read-only | No | Opus |
+| **Seiketsu** | Design System Reviewer | Reviews each step, read-only | No | Sonnet |
 
 - All of them are Figma and design system experts, and follow the same Katiro method.
 - To save usage, pick Sonnet for your conversation: the heavy work happens in the agents.
@@ -191,8 +195,10 @@ Your file already has a kit? The agent offers to complete it, check it or rebuil
 - **Nothing without your approval**: every decision comes with its evidence and a recommendation.
 - **Nothing is deleted**: whatever is replaced goes to an `Archives` page.
 - **Your original screens are never modified.**
+- **The agents only touch Figma**: among your connectors (email, payments, hosting…), a plugin filter only opens the Figma tools to them, and they have no terminal or web access. The survey and review agents can only read the Figma file, and no agent writes files outside the project's `.uikit/` folder. Your file's content is read as data, never as instructions.
+- **One folder per project**: on first run, the agent offers a dedicated folder and, inside a git repository, to keep the project files (which contain your Figma file link) out of git. Your choice is saved and not asked again.
 - **Pick up where you left off**: everything is logged in `uikit.md` and in the file's Review page.
-- **You know where things stand**: updates every minute during long tasks.
+- **You know where things stand**: updates every 3 minutes during long tasks, with today's Figma quota.
 
 ### License
 

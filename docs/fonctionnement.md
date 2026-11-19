@@ -20,9 +20,9 @@ flowchart TB
     subgraph equipe["Les agents de travail, qui ne décident jamais"]
         direction LR
         SI["<b>Seiri</b> · Design System Analyst<br/>Sonnet · lecture seule<br/>survol, inventaire, scan, contrôle"]
-        ST["<b>Seiton</b> · Figma Component Builder<br/>Opus<br/>construit ce qui est validé"]
+        ST["<b>Seiton</b> · Figma Component Builder<br/>Sonnet puis Opus<br/>construit ce qui est validé"]
         SO["<b>Seiso</b> · Design System Optimizer<br/>Sonnet<br/>Revue, Suivi, petites retouches"]
-        SK["<b>Seiketsu</b> · Design System Reviewer<br/>Opus · lecture seule<br/>relit avant chaque recette"]
+        SK["<b>Seiketsu</b> · Design System Reviewer<br/>Sonnet · lecture seule<br/>relit avant chaque recette"]
     end
 
     U <-->|"questions,<br/>validations, recettes"| K

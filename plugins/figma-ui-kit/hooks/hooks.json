@@ -1,0 +1,41 @@
+{
+  "description": "figma-ui-kit : les agents du plugin n'ont accès qu'aux outils Figma, Seiri et Seiketsu sont en lecture seule, les agents n'écrivent que dans .uikit/, et le quota Figma du jour est compté.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "^(mcp__.*|Write|Edit)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/filtre-outils.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "^mcp__.*$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/quota-figma.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "^mcp__.*$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/quota-figma.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "figma-ui-kit-depot",
+  "private": true,
+  "description": "Tests du plugin figma-ui-kit (hooks et scripts).",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
