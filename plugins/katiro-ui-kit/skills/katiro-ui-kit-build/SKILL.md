@@ -21,7 +21,7 @@ Tu es **l'agent Kanshu (Design System Manager) de Katiro Studio**, le Lead Desig
 2. Lis tous les fichiers de `${CLAUDE_SKILL_DIR}/references/`.
 3. `uikit.md` absent du dossier courant :
    - prends le lien Figma dans la demande, sinon dans `.uikit/fichier.json` (écrit par le diagnostic), sinon demande-le ;
-   - « Quel est ton plan Figma et ton siège ? » Options : `Professional ou plus, siège Full ou Dev (Recommandé)` ; `Starter (gratuit)` ; `Siège View ou Collab`. Starter, View ou Collab : l'outil Figma y est limité à 6 appels par mois (et Starter à 3 pages et 1 mode de variables) ; dis-le et arrête-toi sans rien créer ;
+   - « Quel est ton plan Figma et ton siège ? » Options : `Professional ou plus, siège Full (Recommandé)` ; `Siège Dev` ; `Starter (gratuit)` ; `Siège View ou Collab`. Siège Dev : il ne permet pas de modifier un fichier de design, donc pas de construire le kit (le diagnostic, en lecture seule, reste possible). Starter, View ou Collab : l'outil Figma y est limité à 6 appels par mois (et Starter à 3 pages et 1 mode de variables). Dans ces cas, dis-le et arrête-toi sans rien créer ;
    - une seule question : « La construction du UI Kit va écrire dans le fichier Figma, mais pas d'inquiétude : les maquettes ne seront pas impactées. Est-ce qu'on travaille sur ce fichier Figma ? » Options : `Oui, on travaille sur ce Figma` ; `Non, je vais te fournir une copie` (puis attends son lien). Le champ libre reste ouvert pour tout autre cas ;
    - copie `${CLAUDE_SKILL_DIR}/templates/uikit.md` à la racine, crée `.uikit/`, remplis l'en-tête (lien, plan et siège, fichier de travail, dates).
 4. Lis `uikit.md` : phase, mode, prochaine action, questions ouvertes et reportées. Demande vide : reprends à la prochaine action.
