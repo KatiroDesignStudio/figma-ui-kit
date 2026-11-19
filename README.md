@@ -43,14 +43,18 @@ claude plugin update katiro-ui-kit@katiro-studio
 | Agent | Rôle | Modèle |
 |---|---|---|
 | **L'agent Kanshu** (Design System Manager) de Katiro Studio | Te parle, te fait valider, contrôle | celui de ta conversation |
-| **L'agent Shindan** (Designer Diagnostic) de Katiro Studio | Réalise le diagnostic | celui de ta conversation |
-| **Agent Seiri** (Designer Analyst) de Katiro Studio | Mesure le fichier, en lecture seule | Sonnet |
-| **Agent Seiton** (Designer Builder) de Katiro Studio | Construit ce qui a été validé | Opus |
-| **Agent Seiso** (Designer Finisher) de Katiro Studio | Fait les finitions | Sonnet |
-| **Agent Seiketsu** (Designer Reviewer) de Katiro Studio | Relit chaque étape avant ta recette, sans rien modifier | Opus |
-| **L'agent Hairyo** (Design Accessibility RGAA) de Katiro Studio | Recommande, sans rien modifier, d'après le RGAA | celui de ta conversation |
+| **L'agent Shindan** (Figma Auditor) de Katiro Studio | Réalise le diagnostic | celui de ta conversation |
+| **Agent Seiri** (Design System Analyst) de Katiro Studio | Mesure le fichier, en lecture seule | Sonnet |
+| **Agent Seiton** (Figma Component Builder) de Katiro Studio | Construit ce qui a été validé | Opus |
+| **Agent Seiso** (Design System Optimizer) de Katiro Studio | Fait les petites retouches et tient la Revue et le Suivi à jour | Sonnet |
+| **Agent Seiketsu** (Design System Reviewer) de Katiro Studio | Relit chaque étape avant ta recette, sans rien modifier | Opus |
+| **L'agent Hairyo** (Accessibility Designer) de Katiro Studio | Recommande, sans rien modifier, d'après le RGAA | celui de ta conversation |
+
+Trois agents te parlent : Shindan avant le chantier, Kanshu pendant, Hairyo après. Les quatre autres travaillent pour eux et ne décident jamais. Tous sont experts de Figma et du design system, et appliquent la même méthode Katiro.
 
 Pour économiser, choisis Sonnet pour ta conversation : le travail lourd se fait dans les agents.
+
+**Comment ils travaillent ensemble** : qui fait quoi, le parcours complet avec ce qu'il livre, et la boucle de chaque étape (inventaire, construction, contrôle, relecture, recette), en schémas : [docs/fonctionnement.md](docs/fonctionnement.md).
 
 ## Les règles
 - **Rien sans ton accord.** Chaque déduction t'est présentée avec ses preuves et une recommandation. Tu valides tout d'un coup, ou tu corriges les points qui ne te vont pas.

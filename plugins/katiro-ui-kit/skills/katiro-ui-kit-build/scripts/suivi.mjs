@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Suivi d'un lancement long (Seiri, Seiton) pour l'outil Monitor de Claude Code.
+// Suivi d'un lancement long (Seiri, Seiton, Seiketsu) pour l'outil Monitor de Claude Code.
 // Lit .uikit/progression.json, que l'agent réécrit après chaque lot, et imprime
 // une ligne d'avancement par minute au plus. Chaque ligne imprimée devient une
 // notification que l'agent principal affiche telle quelle à l'utilisateur.
