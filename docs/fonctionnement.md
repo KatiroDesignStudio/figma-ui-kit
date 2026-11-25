@@ -4,7 +4,7 @@ Trois schémas pour comprendre le plugin : qui fait quoi, le parcours complet av
 
 ## 1. Qui fait quoi
 
-Shindan, Kanshu et Hairyo sont trois rôles de la même conversation, un par commande : ce sont les seuls qui te parlent, et ils ne font rien sans ton accord. Ils partagent un seul état, `uikit.md` et le dossier `.uikit/` du chantier : ce que l'un relève sert à l'autre. Ils confient le travail à quatre agents partagés, un par compétence, qui ne décident jamais. Chaque rôle n'appelle que ceux dont il a besoin.
+Mitate, Kanshu et Hairyo sont trois rôles de la même conversation, un par commande : ce sont les seuls qui te parlent, et ils ne font rien sans ton accord. Ils partagent un seul état, `uikit.md` et le dossier `.uikit/` du chantier : ce que l'un relève sert à l'autre. Ils confient le travail à quatre agents partagés, un par compétence, qui ne décident jamais. Chaque rôle n'appelle que ceux dont il a besoin.
 
 ```mermaid
 flowchart TB
@@ -12,7 +12,7 @@ flowchart TB
 
     subgraph managers["Ceux qui te parlent"]
         direction LR
-        SH["<b>Shindan</b><br/>Figma Auditor<br/>mesure l'état du fichier"]
+        SH["<b>Mitate</b><br/>Figma Auditor<br/>mesure l'état du fichier"]
         K["<b>Kanshu</b><br/>Design System Manager<br/>te fait valider, pilote, arbitre"]
         HA["<b>Hairyo</b><br/>Accessibility Designer<br/>recommande, sans rien modifier"]
     end
@@ -37,7 +37,7 @@ flowchart TB
     HA --> SO
 ```
 
-Les noms suivent les 5S japonais : Seiri (trier), Seiton (ranger), Seiso (nettoyer), Seiketsu (standardiser).
+Les noms suivent une règle simple. Les agents portent les noms des 5S japonais : Seiri (trier), Seiton (ranger), Seiso (nettoyer), Seiketsu (standardiser) ; le cinquième, Shitsuke (faire durer), reste libre. Ceux qui te parlent ne commencent jamais par S : Mitate (見立て, le coup d'œil de l'expert), Kanshu (監修, la supervision), Hairyo (配慮, l'attention aux autres).
 
 ## 2. Le parcours complet et ce qu'il livre
 

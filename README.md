@@ -79,7 +79,7 @@ Ton fichier a déjà un kit ? L'agent propose de le compléter, de le vérifier 
 
 | Agent | Titre | Rôle | Te parle | Modèle |
 |---|---|---|---|---|
-| **Shindan** | Figma Auditor | Diagnostic du fichier | Oui, avant | Celui de ta conversation |
+| **Mitate** | Figma Auditor | Diagnostic du fichier | Oui, avant | Celui de ta conversation |
 | **Kanshu** | Design System Manager | Pilote le chantier, te fait valider | Oui, pendant | Celui de ta conversation |
 | **Hairyo** | Accessibility Designer | Recommandations RGAA | Oui, après | Celui de ta conversation |
 | **Seiri** | Design System Analyst | Mesure et inventorie, en lecture seule | Non | Sonnet |
@@ -87,7 +87,7 @@ Ton fichier a déjà un kit ? L'agent propose de le compléter, de le vérifier 
 | **Seiso** | Design System Optimizer | Tient la Revue et le Suivi à jour après chaque recette | Non | Sonnet |
 | **Seiketsu** | Design System Reviewer | Vérifie chaque étape avant la recette (mesures, fidélité, présentation), en lecture seule | Non | Sonnet |
 
-- Shindan, Kanshu et Hairyo sont trois rôles de ta conversation, qui partagent le même dossier de chantier : le diagnostic prépare le kit (son relevé est repris, pas refait), et l'accessibilité renvoie ses corrections au kit.
+- Mitate, Kanshu et Hairyo sont trois rôles de ta conversation, qui partagent le même dossier de chantier : le diagnostic prépare le kit (son relevé est repris, pas refait), et l'accessibilité renvoie ses corrections au kit.
 - Tous sont experts de Figma et du design system, et suivent la même méthode Katiro.
 - Pour économiser, choisis Sonnet pour ta conversation : le travail lourd se fait dans les agents.
 - Le fonctionnement en schémas : [docs/fonctionnement.md](docs/fonctionnement.md).
@@ -183,7 +183,7 @@ Your file already has a kit? The agent offers to complete it, check it or rebuil
 
 | Agent | Title | Role | Talks to you | Model |
 |---|---|---|---|---|
-| **Shindan** | Figma Auditor | Audits the file | Yes, before | Your conversation's |
+| **Mitate** | Figma Auditor | Audits the file | Yes, before | Your conversation's |
 | **Kanshu** | Design System Manager | Runs the project, gets your approval | Yes, during | Your conversation's |
 | **Hairyo** | Accessibility Designer | RGAA recommendations | Yes, after | Your conversation's |
 | **Seiri** | Design System Analyst | Measures and inventories, read-only | No | Sonnet |
@@ -191,7 +191,7 @@ Your file already has a kit? The agent offers to complete it, check it or rebuil
 | **Seiso** | Design System Optimizer | Keeps Review and Tracking up to date after each sign-off | No | Sonnet |
 | **Seiketsu** | Design System Reviewer | Checks each step before sign-off (measurements, fidelity, presentation), read-only | No | Sonnet |
 
-- Shindan, Kanshu and Hairyo are three roles of your conversation, sharing the same project folder: the audit prepares the kit (its survey is reused, not redone), and accessibility sends its fixes back to the kit.
+- Mitate, Kanshu and Hairyo are three roles of your conversation, sharing the same project folder: the audit prepares the kit (its survey is reused, not redone), and accessibility sends its fixes back to the kit.
 - All of them are Figma and design system experts, and follow the same Katiro method.
 - To save usage, pick Sonnet for your conversation: the heavy work happens in the agents.
 - How it works, in diagrams (in French): [docs/fonctionnement.md](docs/fonctionnement.md).

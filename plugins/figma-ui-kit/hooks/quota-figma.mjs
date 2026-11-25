@@ -11,7 +11,7 @@
 // refuse un appel pour cause de limite, le refus fait foi.
 //
 // Usage en hook : JSON de l'événement sur stdin.
-// Usage en ligne de commande (Kanshu, Shindan, Hairyo, scripts/suivi.mjs) :
+// Usage en ligne de commande (Kanshu, Mitate, Hairyo, scripts/suivi.mjs) :
 //   node quota-figma.mjs --etat            une ligne d'état du jour
 //   node quota-figma.mjs --limite 200      règle la limite du jour (après whoami)
 import { appendFileSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
