@@ -36,7 +36,7 @@ Tous les fichiers du chantier (`uikit.md`, `.uikit/`, `diagnostic-pre-ui-kit.md`
    - `header` : `Git`
    - `options` : `Oui, hors de git (Recommandé)` : « Ajoutés à `.git/info/exclude` : ce dépôt, sur ta machine seulement, sans toucher au `.gitignore` partagé. » ; `Non, versionnés avec le projet` : « Toute personne qui a accès au dépôt verra le lien Figma et les décisions. »
    Hors de git : ajoute à `.git/info/exclude` les chemins du chantier relatifs à la racine du dépôt (le dossier dédié entier, ou les quatre fichiers et `.uikit/`), sans doublon.
-4. Note les réponses dans `.uikit/fichier.json` (`dossier`, `git` : `hors-git`, `versionne` ou `pas-de-depot`, `date`) et dans l'en-tête de `uikit.md` (« Dossier du chantier », « Git »). Elles ne sont jamais reposées : le build et l'accessibilité les relisent dans `fichier.json`.
+4. Note les réponses dans `.uikit/fichier.json`, avec le lien Figma et le nom du fichier (`lien`, `nom`, `dossier`, `git` : `hors-git`, `versionne` ou `pas-de-depot`, `date` au format `2026-11-26`) et dans l'en-tête de `uikit.md` (« Dossier du chantier », « Git »). Elles ne sont jamais reposées : le build et l'accessibilité les relisent dans `fichier.json`.
 
 ## Quota Figma
 Figma limite les appels à son serveur MCP, par jour et par minute, et ne dit pas combien il en reste. Le plugin compte chaque appel Figma fait depuis Claude Code sur cette machine, tous projets confondus (hook `hooks/quota-figma.mjs`), et l'utilisateur est prévenu à 25, 50, 75, 85, 90, 95 et 100 %. Les appels faits ailleurs (autre machine, autre application) ne sont pas vus : le compteur est un minimum, et un refus de Figma fait foi.

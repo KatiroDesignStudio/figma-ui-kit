@@ -12,7 +12,10 @@
 // 4. Scripts de mesure : un code `use_figma` qui porte l'en-tête
 //    `// figma-ui-kit:script {nom} v{n}` doit être le fichier livré par le plugin,
 //    aux paramètres près (le texte entre `/*PARAMS*/` et `/*FIN-PARAMS*/`).
-// Hors de ces agents, le filtre ne fait rien : la conversation de
+// Pour tout appelant, agents et conversation principale :
+// 5. Format : un Write ou un Edit dans `.uikit/` doit laisser un fichier conforme
+//    à son format (`format-uikit.mjs`, d'après references/donnees.md).
+// Hors de ces règles, le filtre ne fait rien : la conversation de
 // l'utilisateur garde tous ses outils.
 //
 // Entrée : le JSON de l'événement sur stdin (`tool_name`, `tool_input`, `agent_type`).
@@ -20,6 +23,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { controlerEcriture, estDossierUikit } from './format-uikit.mjs';
 
 const PLUGIN = 'figma-ui-kit';
 const AGENTS = new Set(['seiri', 'seiton', 'seiso', 'seiketsu']);
@@ -145,19 +149,23 @@ export function ecritureFigma(code) {
 /** Vrai si le chemin absolu est dans un dossier `.uikit/`. */
 export function dansUikit(chemin) {
   if (typeof chemin !== 'string') return false;
-  return chemin.split(/[\\/]/).includes('.uikit');
+  return chemin.split(/[\\/]/).some(estDossierUikit);
 }
 
 /** Décision pour un événement : `null` pour laisser passer, sinon la raison du refus. */
 export function decider(evenement) {
   const agent = agentDuPlugin(evenement?.agent_type);
-  if (!agent) return null;
   const outil = typeof evenement?.tool_name === 'string' ? evenement.tool_name : '';
   const entree = evenement?.tool_input ?? {};
-  const etiquette = `L'agent ${PLUGIN}:${agent}`;
+  const etiquette = agent ? `L'agent ${PLUGIN}:${agent}` : PLUGIN;
+
+  if (OUTILS_FICHIERS.has(outil) && dansUikit(entree.file_path)) {
+    const format = controlerEcriture(outil, entree, { inconnusPermis: !agent });
+    return format ? `${etiquette} : écriture refusée. ${format}` : null;
+  }
+  if (!agent) return null;
 
   if (OUTILS_FICHIERS.has(outil)) {
-    if (dansUikit(entree.file_path)) return null;
     return `${etiquette} n'écrit que dans le dossier .uikit/ du chantier. `
       + `Écriture refusée : ${entree.file_path ?? '(chemin absent)'}. Rends ce besoin en doute à Kanshu.`;
   }
