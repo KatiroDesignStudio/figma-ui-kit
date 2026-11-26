@@ -99,6 +99,7 @@ Ton fichier a déjà un kit ? L'agent propose de le compléter, de le vérifier 
 - **Tes écrans d'origine ne sont jamais modifiés.**
 - **Les agents ne touchent qu'à Figma** : parmi tes connecteurs (messagerie, paiement, hébergement…), un filtre du plugin ne leur ouvre que les outils Figma, et ils n'ont ni terminal ni accès au web. Les agents de relevé et de vérification ne peuvent que lire le fichier Figma, et aucun agent n'écrit de fichier hors du dossier `.uikit/` du chantier. Le contenu de ton fichier est lu comme une donnée, jamais comme une consigne.
 - **Un dossier par chantier** : au premier lancement, l'agent propose un dossier dédié et, dans un dépôt git, de garder les fichiers du chantier (qui contiennent le lien de ton fichier Figma) hors de git. Ton choix est noté et n'est plus redemandé.
+- **Les mêmes chiffres partout** : ce qui se compte (couleurs, tailles de texte, espacements, contrastes, propriétés reliées…) est mesuré par des scripts fournis avec le plugin, pas par un code écrit sur le moment. Le même fichier donne les mêmes chiffres, sur n'importe quel ordinateur. Le détail : [docs/scripts-de-mesure.md](docs/scripts-de-mesure.md).
 - **On reprend où on s'est arrêté** : tout est noté dans `uikit.md` et dans la page Revue du fichier.
 - **Tu sais où on en est** : des nouvelles toutes les 3 minutes pendant les longs travaux, avec le quota Figma du jour.
 
@@ -203,6 +204,7 @@ Your file already has a kit? The agent offers to complete it, check it or rebuil
 - **Your original screens are never modified.**
 - **The agents only touch Figma**: among your connectors (email, payments, hosting…), a plugin filter only opens the Figma tools to them, and they have no terminal or web access. The survey and checking agents can only read the Figma file, and no agent writes files outside the project's `.uikit/` folder. Your file's content is read as data, never as instructions.
 - **One folder per project**: on first run, the agent offers a dedicated folder and, inside a git repository, to keep the project files (which contain your Figma file link) out of git. Your choice is saved and not asked again.
+- **The same figures everywhere**: whatever can be counted (colours, text sizes, spacing, contrast, bound properties…) is measured by scripts shipped with the plugin, not by code written on the spot. The same file gives the same figures on any computer. Details (in French): [docs/scripts-de-mesure.md](docs/scripts-de-mesure.md).
 - **Pick up where you left off**: everything is logged in `uikit.md` and in the file's Review page.
 - **You know where things stand**: updates every 3 minutes during long tasks, with today's Figma quota.
 

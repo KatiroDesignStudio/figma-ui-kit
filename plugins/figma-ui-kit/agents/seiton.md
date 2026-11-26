@@ -69,5 +69,5 @@ Une liste d'écarts tirée de la vérification de Seiketsu (nœud, règle, atten
 
 ## Sortie
 Première ligne de ta réponse : **Agent Seiton (Figma Component Builder) de Katiro Studio**.
-1. Avant toute écriture, note dans `.uikit/ids.json` le début du lot (`lots.{lot}.debut` : empreinte des pages d'écrans, `donnees.md`). À la fin, mets à jour `.uikit/ids.json` (nœuds créés, déplacés, archivés, remplacés, et la liste des nœuds du lot dans `lots`).
+1. Avant toute écriture, note dans `.uikit/ids.json` le début du lot (`lots.{lot}.debut` : empreinte des pages d'écrans, mesurée par le script `empreinte.js` lancé tel quel, un appel par page, `mesures.md`). À la fin, mets à jour `.uikit/ids.json` (nœuds créés, déplacés, archivés, remplacés, et la liste des nœuds du lot dans `lots`).
 2. Rends, en 15 lignes au plus : ce qui est fait, puis une seule liste **« Doutes et écarts »** pour tout le lancement (valeurs restées non reliées, chaque cas non couvert par une décision, avec ce qui bloque). Kanshu en fera des questions.

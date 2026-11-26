@@ -9,13 +9,17 @@
 //    de lecture. Un code qui écrit dans le fichier (création, suppression,
 //    déplacement, réglage d'une propriété) est refusé.
 // 3. Fichiers : Write et Edit n'écrivent que dans un dossier `.uikit/`.
+// 4. Scripts de mesure : un code `use_figma` qui porte l'en-tête
+//    `// figma-ui-kit:script {nom} v{n}` doit être le fichier livré par le plugin,
+//    aux paramètres près (le texte entre `/*PARAMS*/` et `/*FIN-PARAMS*/`).
 // Hors de ces agents, le filtre ne fait rien : la conversation de
 // l'utilisateur garde tous ses outils.
 //
 // Entrée : le JSON de l'événement sur stdin (`tool_name`, `tool_input`, `agent_type`).
 // Sortie : rien (l'appel continue), ou une décision `deny` avec sa raison.
 import { readFileSync } from 'node:fs';
-import { pathToFileURL } from 'node:url';
+import { join } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const PLUGIN = 'figma-ui-kit';
 const AGENTS = new Set(['seiri', 'seiton', 'seiso', 'seiketsu']);
@@ -47,6 +51,73 @@ const ECRITURES_FIGMA = [
   /\bimport\w*ByKeyAsync\s*\(/,
   /\.(name|x|y|fills|strokes|effects|characters|visible|locked|opacity|cornerRadius|layoutMode|itemSpacing|paddingLeft|paddingRight|paddingTop|paddingBottom|fontSize|fontName|textStyleId|fillStyleId|strokeStyleId|effectStyleId|gridStyleId|strokeWeight|description|constraints|clipsContent|rotation|layoutSizingHorizontal|layoutSizingVertical|primaryAxisSizingMode|counterAxisSizingMode|layoutPositioning|scopes|hiddenFromPublishing|codeSyntax)\s*=(?![=>])/,
 ];
+
+const DOSSIER_SCRIPTS = fileURLToPath(new URL('../skills/build/scripts/figma/', import.meta.url));
+const MENTION_SCRIPT = 'figma-ui-kit:script';
+const LONGUEUR_DEBUT = 300;
+const EN_TETE_SCRIPT = /^\/\/ figma-ui-kit:script (\S*) v\d+$/;
+const NOM_SCRIPT = /^[a-z][a-z0-9-]*$/;
+const SEGMENT_PARAMS = /\/\*PARAMS\*\/([\s\S]*?)\/\*FIN-PARAMS\*\//;
+const CONSIGNE_SCRIPT = 'Relis le fichier du script dans skills/build/scripts/figma/ et lance-le tel quel : ne change que les paramètres, entre /*PARAMS*/ et /*FIN-PARAMS*/.';
+
+/** Vrai si le texte est un objet JSON (ni tableau, ni valeur simple). */
+function estObjetJson(texte) {
+  try {
+    const valeur = JSON.parse(texte);
+    return valeur !== null && typeof valeur === 'object' && !Array.isArray(valeur);
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Texte d'un script livré, ou `null` s'il n'existe pas (nom invalide ou fichier absent).
+ * Toute autre erreur de lecture est relancée.
+ */
+function lireScriptLivre(nom, dossier) {
+  if (!NOM_SCRIPT.test(nom)) return null;
+  try {
+    return readFileSync(join(dossier, `${nom}.js`), 'utf8');
+  } catch (erreur) {
+    if (erreur.code === 'ENOENT') return null;
+    throw erreur;
+  }
+}
+
+const finsDeLigneUnix = (texte) => texte.replace(/\r\n?/g, '\n');
+
+/**
+ * Contrôle d'un code `use_figma` qui porte l'en-tête d'un script du plugin :
+ * rend `null` s'il est conforme (ou sans en-tête), sinon la raison du refus.
+ * `dossier` ne sert qu'aux tests.
+ */
+export function scriptConforme(code, dossier = DOSSIER_SCRIPTS) {
+  if (typeof code !== 'string') return null;
+  const entete = code.split(/\r?\n/, 1)[0].match(EN_TETE_SCRIPT);
+  if (!entete) {
+    if (!code.slice(0, LONGUEUR_DEBUT).includes(MENTION_SCRIPT)) return null;
+    return `En-tête de script du plugin déguisé ou mal formé : la première ligne doit être exactement « // ${MENTION_SCRIPT} {nom} v{n} », sans rien devant ni derrière. ${CONSIGNE_SCRIPT}`;
+  }
+  const nom = entete[1];
+  let livre;
+  try {
+    livre = lireScriptLivre(nom, dossier);
+  } catch (erreur) {
+    return `Le fichier du script « ${nom} » est illisible (${join(dossier, `${nom}.js`)} : ${erreur.code ?? erreur.message}). Signale-le à Kanshu.`;
+  }
+  if (livre === null) return `Script du plugin inconnu : « ${nom} ». ${CONSIGNE_SCRIPT}`;
+  return comparer(nom, finsDeLigneUnix(code), finsDeLigneUnix(livre));
+}
+
+/** Compare un code au fichier livré, paramètres mis à part ; `null` s'ils concordent. */
+function comparer(nom, code, livre) {
+  const params = code.match(SEGMENT_PARAMS);
+  if (!params || !SEGMENT_PARAMS.test(livre)) return `Script « ${nom} » : marqueur de paramètres absent. ${CONSIGNE_SCRIPT}`;
+  if (!estObjetJson(params[1])) return `Script « ${nom} » : les paramètres doivent être un objet JSON valide. ${CONSIGNE_SCRIPT}`;
+  const neutre = (texte) => texte.replace(SEGMENT_PARAMS, () => '/*PARAMS*/{}/*FIN-PARAMS*/').trimEnd();
+  if (neutre(code) === neutre(livre)) return null;
+  return `Script « ${nom} » modifié : le code ne correspond pas au fichier livré. ${CONSIGNE_SCRIPT}`;
+}
 
 /** Nom court d'un agent du plugin (`seiri`), ou `null` pour tout autre appelant. */
 export function agentDuPlugin(agentType) {
@@ -96,6 +167,11 @@ export function decider(evenement) {
   if (!OUTILS_FIGMA.has(court)) {
     return `${etiquette} n'a accès qu'aux outils Figma. `
       + `Appel refusé : ${outil}. Continue avec les outils Figma, ou rends ce besoin en doute à Kanshu.`;
+  }
+
+  if (court === 'use_figma') {
+    const script = scriptConforme(entree.code);
+    if (script) return `${etiquette} : ${script}`;
   }
 
   if (court === 'use_figma' && AGENTS_LECTURE_SEULE.has(agent)) {

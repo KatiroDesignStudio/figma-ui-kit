@@ -3,8 +3,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { agentDuPlugin, decider, ecritureFigma, nomCourt } from '../plugins/figma-ui-kit/hooks/filtre-outils.mjs';
+import { agentDuPlugin, decider, ecritureFigma, nomCourt, scriptConforme } from '../plugins/figma-ui-kit/hooks/filtre-outils.mjs';
 
 const SCRIPT = fileURLToPath(new URL('../plugins/figma-ui-kit/hooks/filtre-outils.mjs', import.meta.url));
 
@@ -127,4 +130,101 @@ test('les agents n\'écrivent de fichiers que dans .uikit/', () => {
     assert.match(decider({ ...ok, tool_input: { file_path } }) ?? '', /\.uikit/, String(file_path));
   }
   assert.equal(decider({ tool_name: 'Write', tool_input: { file_path: '/home/exemple/.zshrc' } }), null);
+});
+
+// --- Scripts de mesure du plugin : le corps ne doit pas être modifié ---
+const DOSSIER_SCRIPTS = fileURLToPath(new URL('../plugins/figma-ui-kit/skills/build/scripts/figma/', import.meta.url));
+const MARQUE = /\/\*PARAMS\*\/[\s\S]*?\/\*FIN-PARAMS\*\//;
+const livre = (nom) => readFileSync(DOSSIER_SCRIPTS + nom + '.js', 'utf8');
+const avecParams = (nom, params) => livre(nom).replace(MARQUE, () => `/*PARAMS*/${params}/*FIN-PARAMS*/`);
+const appelSeiri = (code) => ({ agent_type: 'figma-ui-kit:seiri', tool_name: 'mcp__figma__use_figma', tool_input: { code } });
+
+test('un script du plugin livré tel quel est accepté', () => {
+  assert.equal(scriptConforme(livre('empreinte')), null);
+});
+
+test('un script du plugin dont seuls les paramètres changent est accepté', () => {
+  assert.equal(scriptConforme(avecParams('empreinte', '{"pageId":"1:1"}')), null);
+  assert.equal(scriptConforme(avecParams('empreinte', '{ "pageId": "1:1", "liste": [1, 2] }') + '\n\n  '), null);
+});
+
+test('un script du plugin dont une ligne du corps est modifiée est refusé', () => {
+  const modifie = livre('empreinte').replace('return', 'const x = 1; return');
+  const raison = scriptConforme(modifie);
+  assert.match(raison ?? '', /relis le fichier/i);
+  assert.match(raison ?? '', /paramètres/);
+});
+
+test('un nom de script inconnu est refusé', () => {
+  assert.match(scriptConforme('// figma-ui-kit:script inexistant v1\nreturn 1;') ?? '', /inconnu/);
+});
+
+test('un nom qui tente de sortir du dossier ou vise un fichier interne est refusé', () => {
+  for (const nom of ['../../hooks/filtre-outils', '..', 'a/b', '_commun', 'Empreinte', 'empreinte.js', '']) {
+    assert.ok(scriptConforme(`// figma-ui-kit:script ${nom} v1\nreturn 1;`), `nom : ${nom}`);
+  }
+});
+
+test('des paramètres qui ne sont pas un objet JSON sont refusés', () => {
+  for (const params of ['{pageId: 1}', '[1]', 'null', '"texte"', '{} ; evil()', '']) {
+    assert.match(scriptConforme(avecParams('empreinte', params)) ?? '', /JSON/, params);
+  }
+});
+
+test('un script sans marqueur de paramètres est refusé', () => {
+  const sans = livre('empreinte').replace(MARQUE, '{}');
+  assert.match(scriptConforme(sans) ?? '', /marqueur/);
+});
+
+test('un code sans en-tête de script du plugin n\'est pas concerné', () => {
+  assert.equal(scriptConforme('return figma.currentPage.name;'), null);
+  assert.equal(scriptConforme('// autre commentaire\nreturn 1;'), null);
+  assert.equal(scriptConforme(undefined), null);
+  assert.equal(scriptConforme('x'.repeat(300) + '\n// figma-ui-kit:script empreinte v1'), null);
+});
+
+test('les fins de ligne \\r\\n et \\r seul sont normalisées avant la comparaison', () => {
+  const livreLf = livre('empreinte');
+  assert.equal(scriptConforme(livreLf.replace(/\n/g, '\r\n')), null);
+  const [entete, ...corps] = livreLf.split('\n');
+  assert.equal(scriptConforme(entete + '\n' + corps.join('\r')), null);
+});
+
+test('un en-tête déguisé est refusé avec une raison claire', () => {
+  const [entete, ...corps] = livre('empreinte').split('\n');
+  const suite = corps.join('\n');
+  for (const code of [
+    '\uFEFF' + entete + '\n' + suite,
+    ' ' + entete + '\n' + suite,
+    '\n' + entete + '\n' + suite,
+    entete + ' \n' + suite,
+    entete + '\r' + suite,
+  ]) {
+    assert.match(scriptConforme(code) ?? '', /en-tête/i, JSON.stringify(code.slice(0, 40)));
+  }
+});
+
+test('un fichier de script illisible donne un refus qui nomme son chemin', () => {
+  const dossier = mkdtempSync(join(tmpdir(), 'filtre-'));
+  try {
+    mkdirSync(join(dossier, 'empreinte.js'));
+    const raison = scriptConforme('// figma-ui-kit:script empreinte v1\nreturn 1;', dossier);
+    assert.match(raison ?? '', /illisible/);
+    assert.ok(raison.includes(join(dossier, 'empreinte.js')));
+    assert.match(scriptConforme('// figma-ui-kit:script absent v1\nreturn 1;', dossier) ?? '', /inconnu/);
+  } finally {
+    rmSync(dossier, { recursive: true, force: true });
+  }
+});
+
+test('de bout en bout, Seiri peut lancer un script livré et se voit refuser un script modifié', () => {
+  assert.equal(decider(appelSeiri(avecParams('empreinte', '{"pageId":"1:1"}'))), null);
+  const raison = decider(appelSeiri(livre('empreinte').replace('return', 'const x = 1; return')));
+  assert.match(raison ?? '', /figma-ui-kit:seiri/);
+  assert.match(raison ?? '', /relis le fichier/i);
+  assert.equal(decider(appelSeiri('return 1;')), null);
+});
+
+test('le contrôle d\'écriture continue de s\'appliquer à un script conforme', () => {
+  assert.equal(decider({ ...appelSeiri(livre('empreinte')), agent_type: 'figma-ui-kit:seiton' }), null);
 });
