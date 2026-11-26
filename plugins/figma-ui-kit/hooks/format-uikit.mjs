@@ -11,6 +11,7 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { FICHIERS, fichierPour } from './format/fichiers.mjs';
 import { verifier } from './format/types.mjs';
+import { ecartsDesCitations } from './format/familles.mjs';
 import { canon } from '../skills/build/scripts/compteurs.mjs';
 
 const DOSSIER = '.uikit';
@@ -98,7 +99,21 @@ export function controlerContenu(relatif, texteJson, { dossierUikit, inconnusPer
   }
   if (fichier.copieDe) return controlerCopie(relatif, valeur, fichier.copieDe, dossierUikit);
   const ecarts = verifier(valeur, fichier.format);
-  return ecarts.length ? resumer(relatif, ecarts) : null;
+  if (ecarts.length) return resumer(relatif, ecarts);
+  const liens = fichier.citations ? ecartsDesCitations(fichier.citations(valeur), lireInventaire(dossierUikit)) : [];
+  return liens.length ? resumer(relatif, liens) : null;
+}
+
+/** Inventaire du chantier, ou `null` s'il est absent ou illisible (rien à recouper). */
+function lireInventaire(dossierUikit) {
+  const texte = dossierUikit ? lireTexte(join(dossierUikit, 'scan', 'inventaire.json')) : null;
+  if (texte === null) return null;
+  try {
+    return JSON.parse(texte);
+  } catch (erreur) {
+    console.error(`figma-ui-kit : .uikit/scan/inventaire.json illisible (${erreur.message}), familles citées non recoupées.`);
+    return null;
+  }
 }
 
 /** Nombre d'occurrences d'un texte dans un autre. */

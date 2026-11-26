@@ -66,10 +66,10 @@ Règles fixes du plugin : nomenclature, structure, contrôles (dossier `referenc
 -
 
 ## Suivi des familles
-Tiré de l'inventaire validé. États : à faire, en cours, construit, validé, mis de côté. Le cadre Suivi de chaque page du kit n'en montre que construit, validé et mis de côté (`Built`, `Accepted`, `On hold`) ; à faire et en cours n'y figurent pas.
+Tiré de l'inventaire validé : une ligne par famille, avec son identifiant (`F{nnn}`, `scan/inventaire.json`), qui ne change jamais, même si la famille est renommée. États : à faire, en cours, construit, validé, mis de côté. Le cadre Suivi de chaque page du kit n'en montre que construit, validé et mis de côté (`Built`, `Accepted`, `On hold`) ; à faire et en cours n'y figurent pas.
 
-| Famille | Niveau | Variantes observées | État | Décision |
-|---|---|---|---|---|
+| Id | Famille | Niveau | Variantes observées | État | Décision |
+|---|---|---|---|---|---|
 
 ## Lots
 États : à faire, en cours, fait.

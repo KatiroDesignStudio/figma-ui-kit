@@ -4,6 +4,7 @@
 // sauf les rares champs obligatoires d'un fichier écrit d'un seul coup.
 // Un élément de liste, lui, s'écrit en entier : ses champs obligatoires sont exigés.
 import { booleen, choix, dico, entier, libre, liste, motif, nombre, nul, objet, scelle, texte, unDe } from './types.mjs';
+import { blocCiteSaFamille, citationsDe, FAMILLE, familleRetiree, identifiantsUniques, liensInventaire } from './familles.mjs';
 
 const NOEUD = motif(/^I?\d+:\d+(;\d+:\d+)*$/, 'identifiant de nœud Figma, par exemple 2334:193');
 const CONSTAT = motif(/^C\d{3,}$/, 'C et trois chiffres au moins, par exemple C007');
@@ -15,7 +16,7 @@ const NOEUDS_CONSTAT = 20;
 const NOEUDS_FORME = 3;
 const NOEUDS_BLOC = 5;
 
-const ferme = (champs, requis = []) => objet(champs, { ferme: true, requis });
+const ferme = (champs, requis = [], regles = []) => objet(champs, { ferme: true, requis, regles });
 const element = (champs, requis, regles = []) => objet(champs, { requis, regles });
 
 const CONSTAT_SCAN = element({
@@ -119,18 +120,19 @@ const INVENTAIRE = ferme({
     formes: liste(element({ id: texte(), occurrences: entier(), part: nombre(), ecrans: liste(libre()), noeuds: liste(texte(), { max: NOEUDS_FORME }), ecarts: libre() }, ['id'])),
     signature: libre(), occurrences: entier(), calques: entier(), ecrans: liste(libre()), noeuds: liste(texte(), { max: NOEUDS_BLOC }),
     variantesObservees: liste(element({ description: texte(), occurrences: entier(), noeuds: liste(texte()) }, ['description'])),
-    interactif: booleen(), niveauPropose: libre(), familleProposee: libre(),
+    interactif: booleen(), niveauPropose: libre(), familleProposee: nul(FAMILLE),
     statut: choix('famille', 'hors-kit', 'a-trancher'), motif: nul(texte()), confiance: libre(),
-  }, ['id', 'statut'], [horsKitAvecMotif])),
+  }, ['id', 'statut'], [horsKitAvecMotif, blocCiteSaFamille])),
   familles: liste(element({
-    nom: texte({ nonVide: true }), niveau: libre(), blocs: liste(BLOC), variantesObservees: liste(libre()), variantesNonVues: liste(libre()),
-  }, ['nom', 'blocs'])),
+    id: FAMILLE, nom: texte({ nonVide: true }), niveau: libre(), blocs: liste(BLOC), variantesObservees: liste(libre()), variantesNonVues: liste(libre()),
+    fusionneeDans: FAMILLE, abandonnee: texte({ nonVide: true }), issueDe: FAMILLE,
+  }, ['id', 'nom', 'blocs'], [familleRetiree])),
   catalogue: element({
     types: liste(libre()), trouves: liste(element({ element: texte(), formes: entier(), occurrences: entier() }, ['element'])),
     attendusNonVus: liste(libre()), specifiques: liste(libre()),
   }, []),
   couverture: libre(),
-});
+}, [], [identifiantsUniques('blocs'), identifiantsUniques('familles'), liensInventaire]);
 
 const VERIFICATION = ferme({
   ecarts: liste(element({
@@ -138,7 +140,7 @@ const VERIFICATION = ferme({
     decision: choix('aucune', 'a-prendre'), etat: choix('ouvert', 'corrige'),
   }, ['id', 'regle', 'decision', 'etat'])),
   familles: liste(element({
-    nom: texte({ nonVide: true }), set: nul(texte()), statut: choix('bon', 'a-corriger', 'a-revoir'),
+    id: FAMILLE, nom: texte({ nonVide: true }), set: nul(texte()), statut: choix('bon', 'a-corriger', 'a-revoir'),
     recommandations: liste(element({
       id: texte({ nonVide: true }), gravite: choix('bloquant', 'important', 'confort'), constat: libre(), noeuds: liste(texte()),
       recommandation: texte({ nonVide: true }), changeRendu: booleen(), decision: libre(),
@@ -162,13 +164,13 @@ const SYNTHESE = ferme({
 const PLAN_ECRAN = ferme({
   id: NOEUD, nom: texte(), compteurs: libre(),
   remplacements: liste(element({
-    noeud: texte(), famille: texte(), decision: libre(), zoneLibre: element({ l: nombre(), h: nombre() }, ['l', 'h']),
+    noeud: texte(), famille: FAMILLE, decision: libre(), zoneLibre: element({ l: nombre(), h: nombre() }, ['l', 'h']),
     largeurContenu: nombre(), disposition: libre(),
   }, ['noeud', 'famille'])),
   liaisons: libre(), corrections: libre(),
   cas: liste(element({ noeud: texte(), motif: choix('disposition-absente', 'zone-trop-petite', 'autre') }, ['noeud', 'motif'])),
   manquesKit: liste(element({
-    noeud: texte(), famille: texte(), type: choix('variante-manquante', 'famille-manquante', 'logo-non-surchargeable', 'couleur-sans-role', 'autre'), detail: libre(),
+    noeud: texte(), famille: nul(FAMILLE), bloc: BLOC, type: choix('variante-manquante', 'famille-manquante', 'logo-non-surchargeable', 'couleur-sans-role', 'autre'), detail: libre(),
   }, ['type'])),
 });
 
@@ -181,14 +183,14 @@ const ACCESSIBILITE = ferme({
 
 const IDS = ferme({
   pages: libre(), collections: libre(), modes: libre(), variables: libre(), styles: libre(),
-  composants: dico(element({ id: texte({ nonVide: true }), page: texte() }, ['id'])),
+  composants: dico(element({ id: texte({ nonVide: true }), page: texte(), famille: FAMILLE }, ['id'])),
   avant: libre(),
   archives: liste(element({ id: texte({ nonVide: true }), remplacePar: nul(texte()), decision: libre() }, ['id'])),
   copies: liste(element({ original: NOEUD, copie: NOEUD }, ['original', 'copie'])),
   remplacements: liste(element({ origine: texte(), instance: texte(), ecran: texte() }, ['origine', 'instance', 'ecran'])),
   presentation: libre(), icones: libre(),
   // Début d'un lot : par page, le résultat d'empreinte.js tel quel, comparé par Seiketsu à son sceau.
-  lots: dico(element({ debut: dico(scelle()), familles: liste(element({ nom: texte({ nonVide: true }), variantesObservees: liste(libre()) }, ['nom'])) }, [])),
+  lots: dico(element({ debut: dico(scelle()), familles: liste(element({ id: FAMILLE, nom: texte({ nonVide: true }), variantesObservees: liste(libre()) }, ['id', 'nom'])) }, [])),
   notesTechniques: libre(),
 });
 
@@ -197,13 +199,29 @@ const PROGRESSION = ferme({
   etat: choix('en_cours', 'fait', 'incomplet'), resume: texte({ nonVide: true }),
 }, ['agent', 'mode', 'etat', 'resume']);
 
+const objetOuVide = (valeur) => (valeur && typeof valeur === 'object' && !Array.isArray(valeur) ? valeur : {});
+
+/** Familles citées par ids.json : composants et familles de chaque lot (traces passées). */
+const citationsIds = (ids) => [
+  ...Object.entries(objetOuVide(ids.composants))
+    .filter(([, c]) => typeof c?.famille === 'string').map(([nom, c]) => ({ chemin: `composants.${nom}.famille`, id: c.famille })),
+  ...Object.entries(objetOuVide(ids.lots)).flatMap(([lot, l]) => citationsDe(l?.familles, `lots.${lot}.familles`, 'id')),
+];
+/** Familles citées par un plan d'écran. */
+const citationsPlan = (plan) => [
+  ...citationsDe(plan.remplacements, 'remplacements', 'famille'),
+  ...citationsDe(plan.manquesKit, 'manquesKit', 'famille'),
+];
+const citationsVerification = (verification) => citationsDe(verification.familles, 'familles', 'id');
+
 const NIVEAUX = 'fondations|atomes|molecules|organismes|kit|correction|coherence|ecran-I?\\d+-\\d+[\\d;-]*';
 
 /**
  * Fichiers de .uikit/, dans l'ordre où l'on cherche le nom.
  * `nom` : le nom tel que l'écrit donnees.md ; `chemin` : le chemin relatif à .uikit/.
  * `format` : la description du contenu ; `script` : fichier écrit par un script, jamais à la main ;
- * `copieDe` : fichier qui doit être la copie conforme d'un autre.
+ * `copieDe` : fichier qui doit être la copie conforme d'un autre ;
+ * `citations` : (contenu) => familles citées, recoupées avec scan/inventaire.json.
  */
 export const FICHIERS = Object.freeze([
   { nom: 'survol.json', chemin: /^survol\.json$/, format: SURVOL },
@@ -216,11 +234,11 @@ export const FICHIERS = Object.freeze([
   { nom: 'scan/compteurs.json', chemin: /^scan\/compteurs\.json$/, script: 'scripts/compteurs.mjs' },
   { nom: 'scan/compteurs-avant.json', chemin: /^scan\/compteurs-avant\.json$/, copieDe: 'scan/compteurs.json' },
   { nom: 'scan/delta-P{phase}.json', chemin: /^scan\/delta-P\d+\.json$/, format: DELTA },
-  { nom: 'scan/plan-{ecranId}.json', chemin: /^scan\/plan-I?\d+-\d+[\d;-]*\.json$/, format: PLAN_ECRAN },
+  { nom: 'scan/plan-{ecranId}.json', chemin: /^scan\/plan-I?\d+-\d+[\d;-]*\.json$/, format: PLAN_ECRAN, citations: citationsPlan },
   { nom: 'scan/{pageId}.json', chemin: /^scan\/\d+-\d+\.json$/, format: PAGE_SCAN },
-  { nom: 'verification-{niveau}.json', chemin: new RegExp(`^verification-(${NIVEAUX})\\.json$`), format: VERIFICATION },
+  { nom: 'verification-{niveau}.json', chemin: new RegExp(`^verification-(${NIVEAUX})\\.json$`), format: VERIFICATION, citations: citationsVerification },
   { nom: 'accessibilite.json', chemin: /^accessibilite\.json$/, format: ACCESSIBILITE },
-  { nom: 'ids.json', chemin: /^ids\.json$/, format: IDS },
+  { nom: 'ids.json', chemin: /^ids\.json$/, format: IDS, citations: citationsIds },
   { nom: 'progression.json', chemin: /^progression\.json$/, format: PROGRESSION },
 ].map(Object.freeze));
 

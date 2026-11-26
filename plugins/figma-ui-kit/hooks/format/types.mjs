@@ -18,7 +18,7 @@ export const motif = (re, attendu) => fige({ sorte: 'motif', re, attendu });
 export const liste = (element, { max } = {}) => fige({ sorte: 'liste', element, max });
 /**
  * Objet aux champs connus. `requis` : champs obligatoires ; `ferme` : toute autre clé
- * est refusée ; `regles` : fonctions (objet) => message ou null, pour les liens entre champs.
+ * est refusée ; `regles` : fonctions (objet) => message, liste de messages ou null, pour les liens entre champs.
  */
 export const objet = (champs, { requis = [], ferme = false, regles = [] } = {}) => fige({
   sorte: 'objet', champs: fige({ ...champs }), requis: Object.freeze([...requis]), ferme, regles: Object.freeze([...regles]),
@@ -57,7 +57,7 @@ function verifierObjet(valeur, description, chemin) {
     .filter((cle) => valeur[cle] !== undefined)
     .flatMap((cle) => verifier(valeur[cle], description.champs[cle], sous(chemin, cle)));
   const regles = description.regles
-    .map((regle) => regle(valeur))
+    .flatMap((regle) => [regle(valeur)].flat())
     .filter(Boolean)
     .map((message) => `${ici(chemin)} : ${message}`);
   return [...absents, ...inconnus, ...champs, ...regles];

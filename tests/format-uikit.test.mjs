@@ -336,9 +336,9 @@ test('les écritures que demandent les consignes des agents passent', () => {
     ['perimetre.json', { kitExistant: { familles: [{ nom: 'Bouton', conforme: true }], partReliee: 72.5, faitParKatiro: false } }],
     ['perimetre-valide.json', { couverture: 'rangee', typeProduit: [{ type: 'saas', indices: ['tableau de bord'] }], horsLot: ['2:1'] }],
     ['scan/synthese.json', { grilles: [{ conteneur: '2:1', grille: '12 colonnes' }], logo: 'non vu', couverture: { taux: 94.1 } }],
-    ['scan/plan-12-34.json', { manquesKit: [{ noeud: '12:40', famille: 'Carte', type: 'famille-manquante' }] }],
+    ['scan/plan-12-34.json', { manquesKit: [{ noeud: '12:40', famille: null, bloc: 'B004', type: 'famille-manquante' }] }],
     ['verification-ecran-12-34.json', { resteAFaire: [{ section: 'En-tête', constat: 'valeur en dur', noeuds: ['12:41'] }] }],
-    ['ids.json', { lots: { 'P3-02': { debut: { '0:1': empreinte }, familles: [{ nom: 'Bouton', variantesObservees: [] }] } } }],
+    ['ids.json', { lots: { 'P3-02': { debut: { '0:1': empreinte }, familles: [{ id: 'F001', nom: 'Bouton', variantesObservees: [] }] } } }],
   ];
   for (const [relatif, valeur] of cas) assert.equal(controler(relatif, valeur), null, `${relatif} : ${controler(relatif, valeur)}`);
 });
