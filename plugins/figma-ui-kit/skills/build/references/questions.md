@@ -53,7 +53,7 @@ Dis une fois, en une phrase, la conséquence mesurée, puis applique son choix :
 
 ## Après la réponse
 1. Écris tout de suite dans `uikit.md`, avec les noms complets (`color/bg/default`), une règle `R{n}` (s'applique partout et pour la suite) ou une décision `D{n}` (s'applique à des éléments précis), avec le numéro du point et la date. Un récapitulatif validé peut donner plusieurs R et D. Marque `(Figma)` celles qui vont dans le bloc « Décisions du kit » de la Revue (`structure-figma.md`) : Seiso les y écrit au prochain passage de la Revue.
-2. Ajoute une ligne au journal.
+2. Ajoute une ligne au journal (`pilotage.md`, « Journal ») : type `decision`, avec les R et D écrites dans `--refs`.
 3. Mets à jour l'état de chaque point.
 
 ## Ton

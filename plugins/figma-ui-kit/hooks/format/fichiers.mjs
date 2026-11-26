@@ -12,6 +12,7 @@ const BLOC = motif(/^B\d{3,}$/, 'B et trois chiffres au moins, par exemple B012'
 const DATE = motif(/^\d{4}-\d{2}-\d{2}([T ]\d{2}:\d{2}(:\d{2}(\.\d+)?)?(Z|[+-]\d{2}:?\d{2})?)?$/, 'date AAAA-MM-JJ, par exemple 2026-11-26');
 const LIEN_FIGMA = motif(/^https:\/\/(www\.)?figma\.com\/\S+$/, 'lien https://www.figma.com/…');
 const CRITERE_RGAA = motif(/^\d{1,2}\.\d{1,2}$/, 'numéro de critère RGAA, par exemple 3.2');
+const AGENTS = ['seiri', 'seiton', 'seiso', 'seiketsu'];
 const NOEUDS_CONSTAT = 20;
 const NOEUDS_FORME = 3;
 const NOEUDS_BLOC = 5;
@@ -195,7 +196,7 @@ const IDS = ferme({
 });
 
 const PROGRESSION = ferme({
-  agent: choix('seiri', 'seiton', 'seiso', 'seiketsu'), mode: texte({ nonVide: true }),
+  agent: choix(...AGENTS), mode: texte({ nonVide: true }),
   etat: choix('en_cours', 'fait', 'incomplet'), resume: texte({ nonVide: true }),
 }, ['agent', 'mode', 'etat', 'resume']);
 
@@ -213,6 +214,19 @@ const citationsPlan = (plan) => [
   ...citationsDe(plan.manquesKit, 'manquesKit', 'famille'),
 ];
 const citationsVerification = (verification) => citationsDe(verification.familles, 'familles', 'id');
+
+const REFERENCE = motif(/^([RDQ]\d+|[CBF]\d{3,}|P\d+-\d{2,}|[KE]\d{2,})$/, 'identifiant du chantier : R3, D12, Q4, C012, B001, F004, P3-02, K01 ou E01');
+const lancementComplet = (ligne) => (ligne.type === 'lancement'
+  ? ['agent', 'appels'].filter((cle) => ligne[cle] === undefined).map((cle) => `un lancement dit ${cle === 'agent' ? "l'agent lancé" : "les appels Figma consommés"} (${cle})`)
+  : null);
+
+/** Une ligne de journal.jsonl : un événement du chantier, daté, écrit par scripts/journal.mjs. */
+export const LIGNE_JOURNAL = ferme({
+  date: DATE, commande: choix('diagnostic', 'build', 'templates', 'accessibilite'),
+  type: choix('demarrage', 'lancement', 'decision', 'execution', 'reprise', 'recette', 'arret', 'cloture', 'note'),
+  texte: texte({ nonVide: true }), agent: choix(...AGENTS), mode: texte({ nonVide: true }),
+  appels: entier({ min: 0 }), economises: entier({ min: 0 }), refs: liste(REFERENCE),
+}, ['date', 'commande', 'type', 'texte'], [lancementComplet]);
 
 const NIVEAUX = 'fondations|atomes|molecules|organismes|kit|correction|coherence|ecran-I?\\d+-\\d+[\\d;-]*';
 
@@ -240,6 +254,7 @@ export const FICHIERS = Object.freeze([
   { nom: 'accessibilite.json', chemin: /^accessibilite\.json$/, format: ACCESSIBILITE },
   { nom: 'ids.json', chemin: /^ids\.json$/, format: IDS, citations: citationsIds },
   { nom: 'progression.json', chemin: /^progression\.json$/, format: PROGRESSION },
+  { nom: 'journal.jsonl', chemin: /^journal\.jsonl$/, script: 'scripts/journal.mjs' },
 ].map(Object.freeze));
 
 /** Fichier de .uikit/ qui correspond à un chemin relatif, ou `undefined`. */

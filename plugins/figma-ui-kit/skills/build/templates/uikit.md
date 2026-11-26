@@ -9,6 +9,7 @@ Mode : {express (d'une seule traite), fin (phase par phase)}
 Démarré le : {date} · Dernière session : {date}
 Phase en cours : 0 Périmètre
 Prochaine action : {action}
+Journal : `.uikit/journal.jsonl` (`scripts/journal.mjs`)
 
 ## Avancement
 États : à faire, en cours, faite, close avec reports, rien à faire.
@@ -93,5 +94,3 @@ Reportés : {liste}
 Questions à envoyer telles quelles :
 -
 
-## Journal
-- {date} Démarrage.

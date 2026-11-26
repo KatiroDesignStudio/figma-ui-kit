@@ -92,7 +92,7 @@ Une phase sans constat ni question est marquée « rien à faire », sans appel 
 2. **Seiri, mode bilan** : compteurs « après » et couverture de l'inventaire (un Seiri neuf s'il a déjà porté deux lancements longs, `pilotage.md`). Puis relance `compteurs.mjs` : l'« avant » se lit dans `scan/compteurs-avant.json`, l'« après » dans `scan/compteurs.json` (`pilotage.md`, « Mesures »).
 3. Question : « La page Revue montre le chantier. Avant de livrer, qu'est-ce que je fais de cette page ? » Options : `Je la garde en tête (Recommandé)` ; `Je la range après le séparateur` ; `Je la range dans Archives`.
 4. **Seiso** finalise toute la Revue, les cadres Suivi (tout en `Accepted`, sauf ce qui est mis de côté) et les dates des cadres titres.
-5. Bilan : avant/après (couverture de l'inventaire comprise), points reportés, questions « avec le client » (textes factices compris), appels Figma consommés par le chantier (journal), ce qui reste au designer, toujours avec : « Publier le kit en bibliothèque (panneau Assets, Publier) : l'outil Figma ne peut pas le faire. » Dernière ligne, la signature (`pilotage.md`).
+5. Bilan : avant/après (couverture de l'inventaire comprise), points reportés, questions « avec le client » (textes factices compris), appels Figma consommés par le chantier (`journal.mjs resume`, `pilotage.md`, « Journal »), ce qui reste au designer, toujours avec : « Publier le kit en bibliothèque (panneau Assets, Publier) : l'outil Figma ne peut pas le faire. » Dernière ligne, la signature (`pilotage.md`).
 6. **La suite**, une seule AskUserQuestion, rien après :
    - `question` : « Le UI Kit est terminé. Qu'est-ce que tu veux faire maintenant ? »
    - `header` : `Suite`

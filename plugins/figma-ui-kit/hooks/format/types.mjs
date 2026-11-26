@@ -8,7 +8,7 @@ const fige = (description) => Object.freeze(description);
 
 export const texte = ({ nonVide = false } = {}) => fige({ sorte: 'texte', nonVide });
 export const nombre = () => fige({ sorte: 'nombre' });
-export const entier = () => fige({ sorte: 'entier' });
+export const entier = ({ min } = {}) => fige({ sorte: 'entier', min });
 export const booleen = () => fige({ sorte: 'booleen' });
 /** Toute valeur JSON : contenu laissé au jugement de l'agent. */
 export const libre = () => fige({ sorte: 'libre' });
@@ -90,7 +90,10 @@ const VERIFICATIONS = {
     return d.nonVide && !v.trim() ? [`${ici(c)} : texte vide`] : [];
   },
   nombre: (v, d, c) => (typeof v === 'number' && Number.isFinite(v) ? [] : attendu(c, 'un nombre', v)),
-  entier: (v, d, c) => (Number.isInteger(v) ? [] : attendu(c, 'un nombre entier', v)),
+  entier: (v, d, c) => {
+    if (!Number.isInteger(v)) return attendu(c, 'un nombre entier', v);
+    return d.min !== undefined && v < d.min ? [`${ici(c)} : ${v} est sous le minimum (${d.min})`] : [];
+  },
   booleen: (v, d, c) => (typeof v === 'boolean' ? [] : attendu(c, 'true ou false', v)),
   libre: () => [],
   choix: (v, d, c) => (d.valeurs.includes(v) ? [] : [`${ici(c)} : ${apercu(v)} n'est pas une valeur permise (${d.valeurs.join(', ')})`]),
